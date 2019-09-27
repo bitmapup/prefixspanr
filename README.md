@@ -1,9 +1,9 @@
 # Contraints OPtimized PrefixSpan with Window Gap
 
+## Created by
 **Author:** Agustin Guevara-Cogorno <br />
 **Contact Details:** a.guevarac@up.edu.pe <br />
 **Institution:** Universidad del Pacifico|University of the Pacific
-
 
 
 ## References
