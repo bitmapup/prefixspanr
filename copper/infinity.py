@@ -1,9 +1,18 @@
-"""
-Infinity class for not relying on os/sys depandant calls such as MAXINT
+# -*- coding: utf-8 -*-
 
-Author: Agustin Guevara-Cogorno
-Contact Details: a.guevarac@up.edu.pe
-Institution: Universidad del Pacifico|University of the Pacific
+"""
+infinity.py: Infinity class for not relying on os/sys depandant calls such as MAXINT.
+
+__author__ = "Agustin Guevara Cogorno"
+__copyright__ = "Copyright 2015, Copper Package"
+__license__ = "GPL"
+__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
+__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
+__email__ = "ye.maeharaa@up.edu.pe"
+__institution_ = "Universidad del Pacifico|University of the Pacific"
+__version__ = "1.1"
+__status__ = "Proof of Concept (POC)"
+
 """
 class Infinity(object):
     def __init__(self):

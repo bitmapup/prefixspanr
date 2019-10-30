@@ -1,15 +1,38 @@
-"""
-Module for the Logical evaluation functionality of COPPER using ShuntingYard to
+# -*- coding: utf-8 -*-
+
+"""logicaleval.py: Module for the Logical evaluation functionality of COPPER using ShuntingYard to
 Postfix notation and an evaluation tree to finally obtain a function that takes
 a pattern and returns if it fulfills the logical condition given on the generating
-options.
+options."""
 
-Author: Agustin Guevara-Cogorno
-Contact Details: a.guevarac@up.edu.pe
-Institution: Universidad del Pacifico|University of the Pacific
-"""
+__author__ = "Agustin Guevara Cogorno"
+__copyright__ = "Copyright 2015, Copper Package"
+__license__ = "GPL"
+__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
+__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
+__email__ = "ye.maeharaa@up.edu.pe"
+__institution_ = "Universidad del Pacifico|University of the Pacific"
+__version__ = "1.1"
+__status__ = "Proof of Concept (POC)"
+
 
 def evaluator(logicalExpresion):
+    """
+    Evaluate logical expression.
+
+    Extended description of function.
+
+    Parameters
+    ----------
+    logicalExpresion : string
+        Logical expression to evaluate
+
+    Returns
+    -------
+    Boolean
+        Logical Expression Value
+
+    """
     tokenizedExpression = filter(lambda x: x, logicalExpresion.replace(' ','')
                                                               .replace('&',"\0&\0")
                                                               .replace(')',"\0)\0")
@@ -19,7 +42,24 @@ def evaluator(logicalExpresion):
     evalTree = posttotree(shuntingyard(tokenizedExpression))
     return lambda x: evalTree.evaluate(x)
 
+
 def shuntingyard(tokenChain):
+    """
+    Convert Infix Notation to Postfix Notation.
+
+    Extended description of function.
+
+    Parameters
+    ----------
+    tokenChain : string
+        token string to analyze
+
+    Returns
+    -------
+    Char Queue
+        Queue Char in Postfix Order
+
+    """
     stack = []
     queue = []
     for token in tokenChain:
@@ -43,7 +83,26 @@ def shuntingyard(tokenChain):
         queue.append(stack.pop())
     return queue
 
+"""
+ 
+"""
 def posttotree(postfixChain):
+    """
+    Populate Evaluation Tree with List in Postfix Notation
+
+    Extended description of function.
+
+    Parameters
+    ----------
+    postfixChain : string
+        postfix String used to populate a tree
+
+    Returns
+    -------
+    Tree List
+        List of tree leaves
+
+    """
     stack = []
     for token in postfixChain:
         if token == "&" or token == "|":
@@ -63,12 +122,18 @@ def dictionaryeval(dictionary, token):
     else:
         return token in dictionary'''
 
+"""
+ Abstract Syntax Tree
+"""
 class Tree:
     def __init__(self, root, lLeaf=None, rLeaf=None):
         self.root = root
         self.left = lLeaf
         self.right = rLeaf
-        
+
+    """
+    Evaluate tree in semantic way 
+    """    
     def evaluate(self, dictionary):
         if self.left:
             l = self.left.evaluate()
@@ -77,14 +142,23 @@ class Tree:
         if self.right:
             r = self.right.evaluate()
         if l and r:
-            if token == '&':
+            #if token == '&':
+            if self.root == '&':
                 return l and r
-            if token == '|':
+            #if token == '|':
+            if self.root == '|':
                 return l or r
-            
+
+
+    """
+    evaluate if tree is empty
+    """
     def __nonzero__(self):
         return bool(self.root)
-    
+
+    """
+    show tree in a string
+    """
     def show(self):
         if self.left:
             return '('+self.left.show()+str(self.root)+self.right.show()+')'

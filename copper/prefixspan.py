@@ -1,23 +1,28 @@
-"""
-Implementation of Jiawei Han, Jian Pei, Behzad Mortazavi-Asl, Helen Pinto, Qiming Chen, Umeshwar Dayal, MC Hsu, Prefixspan Algorithm (http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf) in Python.
-With additional capabilities added from Guevara-Cogorno, Flamand, Alatrista Salas, COPPER Paper (http://www.sciencedirect.com/science/article/pii/S1877050915024990)
-and Window/Time Gap Capabilities added.
+# -*- coding: utf-8 -*-
 
-Author: Agustin Guevara-Cogorno
-Contact Details: a.guevarac@up.edu.pe
-Institution: Universidad del Pacifico|University of the Pacific
-"""
+"""prefixsan.py: Implementation of Jiawei Han, Jian Pei, Behzad Mortazavi-Asl, Helen Pinto, Qiming Chen, Umeshwar Dayal, MC Hsu, Prefixspan Algorithm (http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf) in Python.
+With additional capabilities added from Guevara-Cogorno, Flamand, Alatrista Salas, COPPER Paper (http://www.sciencedirect.com/science/article/pii/S1877050915024990)
+and Window/Time Gap Capabilities added."""
+
+__author__ = "Agustin Guevara Cogorno"
+__copyright__ = "Copyright 2015, Copper Package"
+__license__ = "GPL"
+__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
+__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
+__email__ = "ye.maeharaa@up.edu.pe"
+__institution_ = "Universidad del Pacifico|University of the Pacific"
+__version__ = "1.1"
+__status__ = "Proof of Concept (POC)"
+
+
 from seqpattern import Pattern
 from dbpointer import DBPointer, CopperPointer, WindowGapPointer, WinCopPointer
 from infinity import Infinity
 import logiceval
 
 def __parse_db__(db):
-    """
-    Takes a list of strings in the expected format and 
-    parses them into the db, a converter from zone to zone_id
-    and a frequency dictionary each item on the database
-    """
+    """Takes a list of strings in the expected format and parses them into the db, a converter from zone to zone_id
+        and a frequency dictionary each item on the database"""
     zone2int = {}
     parseddb = []
     itembag={}
@@ -43,12 +48,9 @@ def __parse_db__(db):
     return parseddb, zone2int, itembag
 
 def __parse_options__(options):
-    """
-    Parses options and checks the minimum set of options is present. 
-    Selects the correct classes for each version of the algorithm.
-    """
+    """Parses options and checks the minimum set of options is present. Selects the correct classes for each version of the algorithm."""
     assert 'threshold' in options
-    assert isinstance( options['threshold'], ( int ) )
+    assert isinstance( options['threshold'], ( int, long ) )
     #Standard prefixspan
     options['Pattern'] = Pattern
     options['DBPointer'] = DBPointer
@@ -126,10 +128,7 @@ def __prefixspan__(u_pointerdb, u_pattern, options, freqpatterns):
     return
 
 def prefixspan(u_db, u_options):
-    """
-    Prefixspan entry call, takes a database in the null separator format and a dictionary 
-    of options and returns frequent patterns and their frequency.
-    """
+    """Prefixspan entry call, takes a database in the null separator format and a dictionary of options and returns frequent patterns and their frequency."""
     p_db, z2i, ibag = __parse_db__(u_db)
     options = __parse_options__(u_options)
     candidates = __ffi__(options['threshold'], ibag)
@@ -140,8 +139,6 @@ def prefixspan(u_db, u_options):
     for atomicseq in candidates:
             __prefixspan__(pointerdb, atomicseq, options, freqpatterns)
     if 'logic' in options:
-        freqpatterns = list(filter(lambda x: options['logic'](x[0]) and 
-                                             options['minSize']<=len(x[0]) and 
-                                             options['minSseq']<=x[0].size(), freqpatterns))
+        freqpatterns = list(filter(lambda x: options['logic'](x[0]) and options['minSize']<=len(x[0]) and options['minSseq']<=x[0].size(), freqpatterns))
     return freqpatterns
     
