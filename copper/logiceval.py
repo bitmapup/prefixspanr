@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-"""logicaleval.py: Module for the Logical evaluation functionality of COPPER using ShuntingYard to
+"""
+logicaleval.py: Module for the Logical evaluation functionality of COPPER using ShuntingYard to
 Postfix notation and an evaluation tree to finally obtain a function that takes
 a pattern and returns if it fulfills the logical condition given on the generating
-options."""
+options.
 
 __author__ = "Agustin Guevara Cogorno"
 __copyright__ = "Copyright 2015, Copper Package"
@@ -14,7 +15,7 @@ __email__ = "ye.maeharaa@up.edu.pe"
 __institution_ = "Universidad del Pacifico|University of the Pacific"
 __version__ = "1.1"
 __status__ = "Proof of Concept (POC)"
-
+"""
 
 def evaluator(logicalExpresion):
     """
@@ -83,9 +84,6 @@ def shuntingyard(tokenChain):
         queue.append(stack.pop())
     return queue
 
-"""
- 
-"""
 def posttotree(postfixChain):
     """
     Populate Evaluation Tree with List in Postfix Notation
@@ -122,19 +120,32 @@ def dictionaryeval(dictionary, token):
     else:
         return token in dictionary'''
 
-"""
- Abstract Syntax Tree
-"""
 class Tree:
+    """
+    Abstract Syntax Tree
+    """
     def __init__(self, root, lLeaf=None, rLeaf=None):
         self.root = root
         self.left = lLeaf
         self.right = rLeaf
 
-    """
-    Evaluate tree in semantic way 
-    """    
     def evaluate(self, dictionary):
+        """
+        Evaluate tree in semantic way.
+
+        Extended description of function.
+
+        Parameters
+        ----------
+        tokenChain : string
+            token string to analyze
+
+        Returns
+        -------
+        Boolean
+            Logical Expression Value
+
+        """
         if self.left:
             l = self.left.evaluate()
         else:
@@ -149,17 +160,41 @@ class Tree:
             if self.root == '|':
                 return l or r
 
-
-    """
-    evaluate if tree is empty
-    """
     def __nonzero__(self):
+        """
+        evaluate if tree is empty
+
+        Extended description of function.
+
+        Parameters
+        ----------
+        tokenChain : string
+            token string to analyze
+
+        Returns
+        -------
+        Boolean
+            Logical Expression Value
+
+        """
         return bool(self.root)
 
-    """
-    show tree in a string
-    """
     def show(self):
+        """
+        show tree in a string
+        
+        Extended description of function.
+
+        Parameters
+        ----------
+        
+
+        Returns
+        -------
+        String
+            Leaf String Value
+
+        """
         if self.left:
             return '('+self.left.show()+str(self.root)+self.right.show()+')'
         else:

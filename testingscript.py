@@ -107,34 +107,36 @@ if __name__ == '__main__':
     #infile = 'C01T5S250I003SP5_clean.txt'
     #infile = 'C10T8S8I8-FF.txt'
     #infile = 'clean.txt'
-    infile = 'test_spmf.txt'
+    #infile = 'test_spmf.txt'
     #infile = 'test_ascii.txt'
+    infile = 'pei_ascii.txt'
     base = 'Results'
-    delta = 0.0005
-    start = 0.001
-    ratio = start + 6 * delta
-    formatfile = 'spmf'
+    #delta = 0.0005
+    #start = 0.001
+    #ratio = start + 6 * delta
+    ratio = 2
+    formatfile = 'ascii'
 
     # PrefixSpan
-    #options = {'threshold' : ratio, 'format': formatfile}
-    #outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
-    #analyze(infile,outfile,options)
-    # Copper
-    #options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'format': formatfile}
-    #outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
-    #analyze(infile,outfile,options)
-    # WinGap
-    #options = {'threshold' : ratio, 'window' : 3, 'gap' : 0, 'format': formatfile}
-    #outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
-    #analyze(infile,outfile,options)
-    # I think this should be WinCop
-    options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'window' : 3, 'gap' : 0, 'format': formatfile}
+    options = {'threshold' : ratio, 'format': formatfile}
     outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
     analyze(infile,outfile,options)
+    # # Copper
+    # options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'format': formatfile}
+    # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
+    # analyze(infile,outfile,options)
+    # WinGap
+    # options = {'threshold' : ratio, 'window' : 3, 'gap' : 0, 'format': formatfile}
+    # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
+    # analyze(infile,outfile,options)
+    # I think this should be WinCop
+    # options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'window' : 3, 'gap' : 0, 'format': formatfile}
+    # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
+    # analyze(infile,outfile,options)
     # WinCop
-    #options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'window' : 3, 'gap' : 0, 'logical': True, 'format': formatfile}
-    #outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
-    #analyze(infile,outfile,options)
+    # options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'window' : 3, 'gap' : 0, 'logical': True, 'format': formatfile}
+    # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
+    # analyze(infile,outfile,options)
 
 
 

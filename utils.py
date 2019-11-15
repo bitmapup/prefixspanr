@@ -9,8 +9,8 @@ def clean_return_carriage(file):
             for i in range(len(line)):
                 if(line[i] == '\r'):
                     print('retorno')
+            line.replace('\r', '')
             output.write(line)
         except StopIteration:
             break
     output.close()
-    

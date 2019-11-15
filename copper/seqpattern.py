@@ -1,13 +1,17 @@
 """
-Sequential pattern class for use with the prefixspan algorithm.
-Author: Agustin Guevara-Cogorno
-Contact Details: a.guevarac@up.edu.pe
-Institution: Universidad del Pacifico|University of the Pacific
+seqpattern.py: Sequential pattern class for use with the prefixspan algorithm.
 
-Maintainer: Yoshitomi Maehara Aliaga
-Contact Details: ye.maeharaa@up.edu.pe
-Institution: Universidad del Pacifico|University of the Pacific
+__author__ = "Agustin Guevara Cogorno"
+__copyright__ = "Copyright 2015, Copper Package"
+__license__ = "GPL"
+__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
+__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
+__email__ = "ye.maeharaa@up.edu.pe"
+__institution_ = "Universidad del Pacifico|University of the Pacific"
+__version__ = "1.1"
+__status__ = "Proof of Concept (POC)"
 """
+
 import copy as copymodule
 from itertools import chain
 

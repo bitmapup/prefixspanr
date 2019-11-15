@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""interval.py: Pointer to interval and interval operations friend functions ."""
+"""
+interval.py: Pointer to interval and interval operations friend functions .
 
 __author__ = "Agustin Guevara Cogorno"
 __copyright__ = "Copyright 2015, Copper Package"
@@ -11,9 +12,10 @@ __email__ = "ye.maeharaa@up.edu.pe"
 __institution_ = "Universidad del Pacifico|University of the Pacific"
 __version__ = "1.1"
 __status__ = "Proof of Concept (POC)"
+"""
 
-""" Interval Pointer """
 class __IntervalPointer__(object):
+    """ Interval Pointer Class"""
     def __init__(self, ref):
         self.ref = ref
         self.pos = 0
@@ -31,7 +33,22 @@ class __IntervalPointer__(object):
         return self.pos<self.lim
 
 def __intervalu__(intervallist):
-    """Clopen interval union using linesweep"""
+    """
+    Clopen interval union using linesweep.
+
+    Extended description of function.
+
+    Parameters
+    ----------
+    intervallist : list
+        interval list to operate
+
+    Returns
+    -------
+    Boolean
+        Logical Expression Value
+
+    """
     result = []
     for interval in intervallist:
         if not result:
@@ -44,7 +61,22 @@ def __intervalu__(intervallist):
     return result
 
 def __intervaln__(intervallist1, intervallist2):
-    """Interval intersection between two list of disjoint clopen intervals using linesweep"""
+    """
+    Interval intersection between two list of disjoint clopen intervals using linesweep.
+
+    Extended description of function.
+
+    Parameters
+    ----------
+    intervallist : list
+        interval list to operate
+
+    Returns
+    -------
+    Boolean
+        Logical Expression Value
+
+    """
     result = []
     if not(intervallist1 and intervallist2):
         return result

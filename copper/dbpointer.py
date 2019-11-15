@@ -124,6 +124,21 @@ class DBPointer(object):
                 
         
     def assemblecandidates(self,options):
+        """
+        Assemble the candidate sequences
+
+        Extended description of function.
+
+        Parameters
+        ----------
+        options : 
+            Options used to obtain candidates
+        
+        Returns
+        -------
+        List(string)
+            Candidates
+        """
         candidates = set()
         for pos in self.__positions__:
             for val in filter(lambda x: x > self.__last__, self.__origin__[self.__entry__][pos]):
@@ -131,6 +146,19 @@ class DBPointer(object):
         return candidates
 
     def __nonzero__(self):
+        """
+        add candidates.
+
+        Extended description of function.
+
+        Parameters
+        ----------
+        
+        Returns
+        -------
+        Boolean
+            Logic value of nonzero
+        """
         return bool(self.__positions__)
   
 
