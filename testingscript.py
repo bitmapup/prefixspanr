@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 from multiprocessing import Process, Lock
 import copper.prefixspan as ps
 import copper.fileprocessor as fp
@@ -104,18 +107,23 @@ if __name__ == '__main__':
 
 if __name__ == '__main__':
     
+    path='./datasets'
     #infile = 'C01T5S250I003SP5_clean.txt'
-    #infile = 'C10T8S8I8-FF.txt'
+    infile = '%s/C10T8S8I8-FF.txt' % (path)
     #infile = 'clean.txt'
-    #infile = 'test_spmf.txt'
-    #infile = 'test_ascii.txt'
-    infile = 'pei_ascii.txt'
+    #infile = '%s/test_spmf.txt' % (path)
+    #infile = '%s/test_ascii.txt' % (path)
+    #path_res='%s/p6_Corpus.csv' %(path)
+    #path_res='%s/p6_Corpus_reducido.csv' %(path)
+    #infile = '%s/pei_ascii.txt' % (path)
+
     base = 'Results'
-    #delta = 0.0005
-    #start = 0.001
-    #ratio = start + 6 * delta
-    ratio = 2
-    formatfile = 'ascii'
+    delta = 0.0005
+    start = 0.001
+    ratio = start + 6 * delta
+    #ratio = 4
+    #formatfile = 'ascii'
+    formatfile = 'spmf'
 
     # PrefixSpan
     options = {'threshold' : ratio, 'format': formatfile}

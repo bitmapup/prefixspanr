@@ -1,6 +1,10 @@
-CREATE OR REPLACE FUNCTION test() RETURNS void
-LANGUAGE plpgsql
-AS $$
+CREATE OR REPLACE FUNCTION public.test(
+	)
+RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE 
+AS $BODY$
     DECLARE
         value1 text[];
         counter INTEGER := 0 ; 
@@ -13,7 +17,7 @@ AS $$
                 EXIT WHEN counter > quant_elem; 
                 counter := counter + 1 ; 
                 FETCH cur_seq INTO value1;
-                foreach x in array $1 loop
+                LOOP
                     RAISE INFO 'information message %', now();
                 END LOOP;
           MOVE cur_seq;
