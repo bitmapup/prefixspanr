@@ -109,9 +109,9 @@ if __name__ == '__main__':
     
     path='./datasets'
     #infile = 'C01T5S250I003SP5_clean.txt'
-    infile = '%s/C10T8S8I8-FF.txt' % (path)
+    #infile = '%s/C10T8S8I8-FF.txt' % (path)
     #infile = 'clean.txt'
-    #infile = '%s/test_spmf.txt' % (path)
+    infile = '%s/test_spmf.txt' % (path)
     #infile = '%s/test_ascii.txt' % (path)
     #path_res='%s/p6_Corpus.csv' %(path)
     #path_res='%s/p6_Corpus_reducido.csv' %(path)
@@ -126,9 +126,9 @@ if __name__ == '__main__':
     formatfile = 'spmf'
 
     # PrefixSpan
-    options = {'threshold' : ratio, 'format': formatfile}
-    outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
-    analyze(infile,outfile,options)
+    #options = {'threshold' : ratio, 'format': formatfile}
+    #outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
+    #analyze(infile,outfile,options)
     # # Copper
     # options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'format': formatfile}
     # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
@@ -138,13 +138,13 @@ if __name__ == '__main__':
     # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
     # analyze(infile,outfile,options)
     # I think this should be WinCop
-    # options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'window' : 3, 'gap' : 0, 'format': formatfile}
-    # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
+    #options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'window' : 1, 'gap' : 1, 'format': formatfile}
+    #outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
     # analyze(infile,outfile,options)
     # WinCop
-    # options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'maxSize': 3, 'window' : 3, 'gap' : 0, 'logical': True, 'format': formatfile}
-    # outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
-    # analyze(infile,outfile,options)
+    options = {'threshold' : ratio, 'minSseq': 1, 'maxSseq': 2, 'minSize': 1, 'maxSize': 2, 'window' : 3, 'gap' : 2, 'logic': "(1 & 3)", 'format': formatfile}
+    outfile = base + ''.join((str(opt[0])+str(options[opt]) for opt in options)) + '.txt'
+    analyze(infile,outfile,options)
 
 
 
