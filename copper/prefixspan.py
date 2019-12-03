@@ -95,6 +95,7 @@ def __parse_options__(options):
         if 'logic' not in options:
             options['logic'] = lambda x: True
         else:
+            # options['logic'] turns a function which evaluate a expression
             options['logic'] = logiceval.evaluator(options['logic'])
         if 'minSseq' not in options:
             options['minSseq'] = 0
@@ -138,7 +139,7 @@ def __ffi__(support, itembag):
     Returns
     -------
     List
-        Frequent items List
+        Frequent items list which satisfy the threshold of support
 
     """
     return [i for i in itembag if itembag[i]>=support]

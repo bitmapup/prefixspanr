@@ -31,21 +31,20 @@ class DBPointer(object):
     
     def __init__(self, zid, db):
         """
-        Evaluate logical expression.
+        Constructor of PrefixSpan Database Pointer class.
 
         Extended description of function.
 
         Parameters
         ----------
-        db : 
+        db : list(list())
             database of sequences
-        zid : 
-            Identificador of zone
+        zid : list()
+            Identificator of zone
 
         Returns
         -------
-        void
-            Logical Expression Value
+        None
         """
         self.__origin__ = db
         self.__entry__ = zid
@@ -101,7 +100,7 @@ class DBPointer(object):
 
     def appendcandidates(self, options):
         """
-        add candidates.
+        Add candidate to candidate set.
 
         Extended description of function.
 
@@ -125,7 +124,7 @@ class DBPointer(object):
         
     def assemblecandidates(self,options):
         """
-        Assemble the candidate sequences
+        Assemble the candidates set
 
         Extended description of function.
 
@@ -169,13 +168,29 @@ class WindowGapPointer(DBPointer):
     WindowGap Database Pointer Class
     """
     def __init__(self, zid, db):
+        """
+        Constructor of WindowGap Database Pointer class.
+
+        Extended description of function.
+
+        Parameters
+        ----------
+        db : 
+            database of sequences
+        zid : 
+            Identificator of zone
+
+        Returns
+        -------
+        None
+        """
         super(WindowGapPointer, self).__init__(zid, db)
         self.__progenitor__ = []
     
-    """
-    Share Pointer
-    """
     def partialcopy(self):
+        """
+        Share Pointer
+        """
         new = super(WindowGapPointer, self).partialcopy()
         new.__progenitor__ = self.__progenitor__
         return new

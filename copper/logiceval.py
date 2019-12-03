@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from seqpattern import Pattern
+
 """
 logicaleval.py: Module for the Logical evaluation functionality of COPPER using ShuntingYard to
 Postfix notation and an evaluation tree to finally obtain a function that takes
@@ -41,6 +43,7 @@ def evaluator(logicalExpresion):
                                                               .replace('|',"\0|\0")
                                                               .split("\0"))
     evalTree = posttotree(shuntingyard(tokenizedExpression))
+
     return lambda x: evalTree.evaluate(x)
 
 
@@ -80,8 +83,10 @@ def shuntingyard(tokenChain):
                 #    raise("Mismatched Parenthesis)
         else:
             queue.append(token)
+
     while stack:
         queue.append(stack.pop())
+
     return queue
 
 def posttotree(postfixChain):
@@ -110,6 +115,7 @@ def posttotree(postfixChain):
             stack.append(t)
         else:
             stack.append(Tree(token))
+
     return stack.pop()
 
 def dictionaryeval(dictionary, token):
@@ -125,6 +131,24 @@ class Tree:
     Abstract Syntax Tree
     """
     def __init__(self, root, lLeaf=None, rLeaf=None):
+        """
+        Constructor of class Tree
+        
+        Extended description of function.
+
+        Parameters
+        ----------
+        root: Tree
+            root node of tree 
+        lLeaf: Tree
+            left node of tree
+        rLeaf: Tree
+            right node of tree
+
+        Returns
+        -------
+        None
+        """        
         self.root = root
         self.left = lLeaf
         self.right = rLeaf
@@ -137,7 +161,7 @@ class Tree:
 
         Parameters
         ----------
-        tokenChain : string
+        dictionary: string
             token string to analyze
 
         Returns
@@ -146,12 +170,17 @@ class Tree:
             Logical Expression Value
 
         """
+        if type(dictionary) == Pattern:
+            dictionary = str(dictionary).replace('<','').replace('>','').split(', ')
+
         if self.left:
-            l = self.left.evaluate()
+            l = self.left.evaluate(dictionary)
         else:
             return dictionaryeval(dictionary, self.root)
+
         if self.right:
-            r = self.right.evaluate()
+            r = self.right.evaluate(dictionary)
+
         if l and r:
             #if token == '&':
             if self.root == '&':
@@ -162,7 +191,7 @@ class Tree:
 
     def __nonzero__(self):
         """
-        evaluate if tree is empty
+        Evaluate if tree is empty
 
         Extended description of function.
 
@@ -181,7 +210,7 @@ class Tree:
 
     def show(self):
         """
-        show tree in a string
+        Show tree in a string
         
         Extended description of function.
 
