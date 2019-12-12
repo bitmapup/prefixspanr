@@ -3,21 +3,22 @@
 from seqpattern import Pattern
 
 """
-logicaleval.py: Module for the Logical evaluation functionality of COPPER using ShuntingYard to
-Postfix notation and an evaluation tree to finally obtain a function that takes
-a pattern and returns if it fulfills the logical condition given on the generating
-options.
+logicaleval.py: Module for the Logical evaluation functionality of COPPER
+using ShuntingYard to Postfix notation and an evaluation tree to finally
+obtain a function that takes a pattern and returns if it fulfills the logical
+condition given on the generating options.
 
 __author__ = "Agustin Guevara Cogorno"
 __copyright__ = "Copyright 2015, Copper Package"
 __license__ = "GPL"
-__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
+__maintainer__ = "Yoshitomi Edu,ardo Maehara Aliaga"
 __credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
 __email__ = "ye.maeharaa@up.edu.pe"
-__institution_ = "Universidad del Pacifico|University of the Pacific"
+__institution_ = "Universidad del Pacifico"
 __version__ = "1.1"
 __status__ = "Proof of Concept (POC)"
 """
+
 
 def evaluator(logicalExpresion):
     """
@@ -36,11 +37,11 @@ def evaluator(logicalExpresion):
         Logical Expression Value
 
     """
-    tokenizedExpression = filter(lambda x: x, logicalExpresion.replace(' ','')
-                                                              .replace('&',"\0&\0")
-                                                              .replace(')',"\0)\0")
-                                                              .replace('(',"\0(\0")
-                                                              .replace('|',"\0|\0")
+    tokenizedExpression = filter(lambda x: x, logicalExpresion.replace(' ', '')
+                                                              .replace('&', "\0&\0")
+                                                              .replace(')', "\0)\0")
+                                                              .replace('(', "\0(\0")
+                                                              .replace('|', "\0|\0")
                                                               .split("\0"))
     evalTree = posttotree(shuntingyard(tokenizedExpression))
 
@@ -77,9 +78,9 @@ def shuntingyard(tokenChain):
             popped = stack.pop()
             while popped != '(':
                 queue.append(popped)
-                #try:
+                # try:
                 popped = stack.pop()
-                #except:
+                # except:
                 #    raise("Mismatched Parenthesis)
         else:
             queue.append(token)
@@ -88,6 +89,7 @@ def shuntingyard(tokenChain):
         queue.append(stack.pop())
 
     return queue
+
 
 def posttotree(postfixChain):
     """
@@ -118,13 +120,17 @@ def posttotree(postfixChain):
 
     return stack.pop()
 
+
 def dictionaryeval(dictionary, token):
     return token in dictionary
-'''    if ':' in token:
+    '''
+    if ':' in token:
         var, val = token.split(':')
         return var in dictionary and val in dictionary[var]
     else:
-        return token in dictionary'''
+        return token in dictionary
+    '''
+
 
 class Tree:
     """
@@ -133,13 +139,13 @@ class Tree:
     def __init__(self, root, lLeaf=None, rLeaf=None):
         """
         Constructor of class Tree
-        
+
         Extended description of function.
 
         Parameters
         ----------
         root: Tree
-            root node of tree 
+            root node of tree
         lLeaf: Tree
             left node of tree
         rLeaf: Tree
@@ -148,7 +154,7 @@ class Tree:
         Returns
         -------
         None
-        """        
+        """
         self.root = root
         self.left = lLeaf
         self.right = rLeaf
@@ -171,7 +177,7 @@ class Tree:
 
         """
         if type(dictionary) == Pattern:
-            dictionary = str(dictionary).replace('<','').replace('>','').split(', ')
+            dictionary = str(dictionary).replace('<', '').replace('>', '').split(', ')
 
         if self.left:
             l = self.left.evaluate(dictionary)
@@ -182,10 +188,10 @@ class Tree:
             r = self.right.evaluate(dictionary)
 
         if l and r:
-            #if token == '&':
+            # if token == '&':
             if self.root == '&':
                 return l and r
-            #if token == '|':
+            # if token == '|':
             if self.root == '|':
                 return l or r
 
@@ -211,12 +217,12 @@ class Tree:
     def show(self):
         """
         Show tree in a string
-        
+
         Extended description of function.
 
         Parameters
         ----------
-        
+
 
         Returns
         -------
@@ -225,6 +231,6 @@ class Tree:
 
         """
         if self.left:
-            return '('+self.left.show()+str(self.root)+self.right.show()+')'
+            return '(' + self.left.show() + str(self.root) + self.right.show() + ')'
         else:
             return self.root
