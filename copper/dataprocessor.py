@@ -37,6 +37,7 @@ def get_unique_items(database, item_separated=False):
 
     """
     sequence_set = []
+
     if not item_separated:
         for sequence in database:
             for item in sequence:
@@ -47,6 +48,7 @@ def get_unique_items(database, item_separated=False):
 
     sequence_set = list(set(sequence_set))
     sequence_set.sort()
+
     return sequence_set
 
 
@@ -73,6 +75,7 @@ def discretize_sequences(raw_db, item_separated=False):
     """
     sequence_set = get_unique_items(raw_db, item_separated)
     discrete_sequence = {sequence_set[i]: str(i + 1) for i in range(0, len(sequence_set))}
+
     db = []
     if not item_separated:
         for sequence in raw_db:
@@ -168,8 +171,10 @@ def undiscretize_sequences(raw_db, result_pattern_list, item_separated=False):
         database discretized
 
     """
+    
     sequence_set = get_unique_items(raw_db, item_separated)
     undiscrete_sequence = {str(i + 1): sequence_set[i] for i in range(0, len(sequence_set))}
+    
     result_pattern = pattern_to_list(result_pattern_list)
     encoded_result = []
     if not item_separated:

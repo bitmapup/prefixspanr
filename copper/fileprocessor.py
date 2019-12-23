@@ -247,7 +247,7 @@ def get_result_file_name(base, options):
     return outfile
 
 
-def get_result_file(result_mining, options, start=-1, end=-1, base='Results'):
+def get_result_file(result_mining, options, start=-1, end=-1, mem_after=-1, mem_before=-1, base='Results'):
     """
     Obtain summary results file of mining
 
@@ -272,9 +272,12 @@ def get_result_file(result_mining, options, start=-1, end=-1, base='Results'):
     outfile = get_result_file_name(base, options)
     with open(outfile, "w") as out:
         out.write("Options: " + str(options) + '\n')
-        out.write("Patterns Found: " + str(len(result_mining)) + '\n')
+        out.write("Patterns Found: " + str(len(result_mining)) + ' patterns' + '\n')
         if start != -1 and end != -1:
-            out.write("Time Taken: " + str(end - start) + '\n')
+            out.write("Time Taken: " + str(end - start) + ' seconds' + '\n')
+
+	if start != -1 and end != -1:
+            out.write("Memory used: " + str(mem_after - mem_before) + ' Bytes' + '\n')
 
         for pat in sorted(result_mining, key=lambda x: x[1]):
                 out.write(str(pat) + '\n')

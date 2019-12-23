@@ -95,19 +95,23 @@ def __parse_options__(options):
     # Standard prefixspan
     options['DBPointer'] = DBPointer
     # COPPER
-    if any( param in options for param in ['logic', 'minSseq','maxSseq','minSize','maxSize']):
+    if any( param in options for param in ['minSseq','maxSseq','minSize','maxSize']):
         options['DBPointer'] = CopperPointer
         if 'logic' not in options:
             options['logic'] = lambda x: True
         else:
             # options['logic'] turns a function which evaluate a expression
             options['logic'] = logiceval.evaluator(options['logic'])
+            # options['minSseq'] minimum size of a itemize
         if 'minSseq' not in options:
             options['minSseq'] = 0
+            # options['maxSseq'] maximum size of a itemize
         if 'maxSseq' not in options:
             options['maxSseq'] = Infinity()
+            # options['minSize'] minimum size of a pattern
         if 'minSize' not in options:
             options['minSize'] = 0
+            # options['maxSize'] maximum size of a pattern
         if 'maxSize' not in options:
             options['maxSize'] = Infinity()
     # Window
@@ -125,7 +129,7 @@ def __parse_options__(options):
             options['window'] = lambda x, y: [[0, y]]
     # WinCopper
     # if 'logic' in options and 'gap' in options:
-    if any( param in options for param in ['logic', 'minSseq', 'maxSseq', 'minSize', 'maxSize', 'windows', 'gap']):
+    if all( param in options for param in ['minSseq', 'maxSseq', 'minSize', 'maxSize', 'windows', 'gap']):
         options['DBPointer'] = WinCopPointer
     return options
 

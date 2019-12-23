@@ -10,29 +10,63 @@
 **Note:** use Python 2.7.*
 
 ## Description
-Extension of COPPER with time constraints capabilities, improving 
+Extension of COPPER with time constraints capabilities, improving the selection of interesting patterns for expert
 
-## Option Configurations
-### Original PrefixSpan
+## Options
+### Configurations
+**1) Original PrefixSpan**
 ```python
 options = {'threshold' : number}
 ```
+#### Descriptions
+- **threshold:** support of patterns
+  * if threshold value is *integer* means the size of sequences
+  * if threshold value is *float* means the percent of size of database
 
-### COPPER
+**2) COPPER**
 ```python
-options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, minSize': int, 'maxSize': number, 'logic': string}
+options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize': number, 'maxSize': number, 'logic': string}
 ```
+#### Descriptions
+- **threshold:** support of patterns
+  * if threshold value is *integer* means the size of sequences
+  * if threshold value is *float* means the percent of size of database
+- **minSseq:**  minimum itemset size constraint
+- **maxSseq:**  maximum itemset size constraint
+- **minSize:**  minimum pattern size constraint
+- **maxSize:**  maximum pattern size constraint
+- **logic:**    soft inclusion constraint
+  * OR relation '(s1|s2)'
+  * AND relation '(s1 & s2)'
 
-### Prefixspan with time constraints (WinGap)
+**3) Prefixspan with time constraints (WinGap)**
 ```python
-options = {'threshold' : ratio, 'window' : number, 'gap' : number}
+options = {'threshold' : number, 'window' : number, 'gap' : number}
 ```
+#### Descriptions
+- **threshold:** support of patterns
+  * if threshold value is *integer* means the size of sequences
+  * if threshold value is *float* means the percent of size of database
+- **window:**   windows constraint
+- **gap:**      maxgap between itemsets constraint
 
-### COPPER with time constraints (WinCopper)
+**4) COPPER with time constraints (WinCopper)**
 ```python
-options = {'threshold' : int or float, 'minSseq': int, 'maxSseq': int, 'minSize': int, 'maxSize': int,
-           window' : number, 'gap' : number, 'logic': string}
+options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize': number, 'maxSize': number, 'window' : number, 'gap' : number, 'logic': string}
 ```
+#### Descriptions
+- **threshold:** support of patterns
+  * if threshold value is *integer* means the size of sequences
+  * if threshold value is *float* means the percent of size of database
+- **minSseq:**  minimum itemset size constraint
+- **maxSseq:**  maximum itemset size constraint
+- **minSize:**  minimum pattern size constraint
+- **maxSize:**  maximum pattern size constraint
+- **logic:**    soft inclusion constraint
+  * OR relation '(s1|s2)'
+  * AND relation '(s1 & s2)'
+- **window:**   windows between itemsets constraint 
+- **gap:**      limit gap between itemsets constraint
 
 ## Requirements
 - Data should be readed in csv format
@@ -101,4 +135,3 @@ options = {'threshold' : int or float, 'minSseq': int, 'maxSseq': int, 'minSize'
 ## References
 - Guevara-Cogorno, A., Flamand, C. y Alatrista-Salas, H. (2015). COPPER - Constraint OPtimized Prefixspan for Epidemiological Research. *Procedia Computer Science*, *63*, 433-438.  [[link]](http://www.sciencedirect.com/science/article/pii/S1877050915024990)
 - Pei, J., Han, J., Mortazavi-Asl, B. y Pinto H. (2002). PrefixSpan,: mining sequential patterns efficiently by prefix-projected pattern growth. *Proceedings 17th International Conference on Data Engineering*. 215-224. [ [link]](http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf)
-- 
