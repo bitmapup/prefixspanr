@@ -40,5 +40,4 @@ if __name__ == "__main__":
         memory_u = mem_after - mem_before
         test_file(threshold, time_e, memory_u, result_mining_undiscretize)
 
-
         threshold += 0.01 

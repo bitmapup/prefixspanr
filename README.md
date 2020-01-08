@@ -5,7 +5,7 @@
 **Maintainer:** Yoshitomi Maehara <br />
 **Contact Details:** ye.maeharaa@up.edu.pe <br />
 **Institution:** Universidad del Pacifico
-<br /><br />
+<br />
 
 **Note:** use Python 2.7.*
 
@@ -20,8 +20,8 @@ options = {'threshold' : number}
 ```
 #### Descriptions
 - **threshold:** support of patterns
-  * if threshold value is *integer* means the size of sequences
-  * if threshold value is *float* means the percent of size of database
+  * if threshold value is *integer* means the size of sequences (Absolute Support)
+  * if threshold value is *float* means the percent of size of database (Ratio Support)
 
 **2) COPPER**
 ```python
@@ -29,14 +29,14 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
 ```
 #### Descriptions
 - **threshold:** support of patterns
-  * if threshold value is *integer* means the size of sequences
-  * if threshold value is *float* means the percent of size of database
+  * if threshold value is *integer* means the size of sequences (Absolute Support)
+  * if threshold value is *float* means the percent of size of database (Ratio Support)
 - **minSseq:**  minimum itemset size constraint
 - **maxSseq:**  maximum itemset size constraint
 - **minSize:**  minimum pattern size constraint
 - **maxSize:**  maximum pattern size constraint
 - **logic:**    soft inclusion constraint
-  * OR relation '(s1|s2)'
+  * OR relation '(s1 | s2)'
   * AND relation '(s1 & s2)'
 
 **3) Prefixspan with time constraints (WinGap)**
@@ -45,9 +45,9 @@ options = {'threshold' : number, 'window' : number, 'gap' : number}
 ```
 #### Descriptions
 - **threshold:** support of patterns
-  * if threshold value is *integer* means the size of sequences
-  * if threshold value is *float* means the percent of size of database
-- **window:**   windows constraint
+  * if threshold value is *integer* means the size of sequences (Absolute Support)
+  * if threshold value is *float* means the percent of size of database (Ratio Support)
+- **window:**   windows between itemsets constraint
 - **gap:**      maxgap between itemsets constraint
 
 **4) COPPER with time constraints (WinCopper)**
@@ -56,16 +56,16 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
 ```
 #### Descriptions
 - **threshold:** support of patterns
-  * if threshold value is *integer* means the size of sequences
-  * if threshold value is *float* means the percent of size of database
+  * if threshold value is *integer* means the size of sequences (Absolute Support)
+  * if threshold value is *float* means the percent of size of database (Ratio Support)
 - **minSseq:**  minimum itemset size constraint
 - **maxSseq:**  maximum itemset size constraint
 - **minSize:**  minimum pattern size constraint
 - **maxSize:**  maximum pattern size constraint
 - **logic:**    soft inclusion constraint
-  * OR relation '(s1|s2)'
+  * OR relation '(s1 | s2)'
   * AND relation '(s1 & s2)'
-- **window:**   windows between itemsets constraint 
+- **window:**   windows between itemsets constraint
 - **gap:**      limit gap between itemsets constraint
 
 ## Requirements
@@ -113,12 +113,16 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
 
 ```python
     import copper.prefixspan as ps
-    import time
     import copper.profiling as pro
+    import time
+    # mem_before: memory used before process
     mem_before = pro.get_process_memory()
+    # start: time of start the process
     start = time.time()
     result_mining = ps.prefixspan(s_db, options)
+    # end: time of end the process
     end = time.time()
+    # mem_after: memory used after process
     mem_after = pro.get_process_memory()
     # this part measure time and memory consume of processing, this is optional
 ```
@@ -132,7 +136,7 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
 - Can obtain a result file with patterns mined and some important informations
 
 ```python
-   fp.get_result_file(result_mining_undiscretize, start, end, options)
+   fp.get_result_file(result_mining_undiscretize, options, start, end, mem_after, mem_before)
 ```
 
 ## References
