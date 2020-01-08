@@ -268,6 +268,7 @@ def get_result_file(result_mining, options, start=-1, end=-1, mem_after=-1, mem_
     Returns
     -------
     File
+		
     """
     outfile = get_result_file_name(base, options)
     with open(outfile, "w") as out:
@@ -276,7 +277,7 @@ def get_result_file(result_mining, options, start=-1, end=-1, mem_after=-1, mem_
         if start != -1 and end != -1:
             out.write("Time Taken: " + str(end - start) + ' seconds' + '\n')
 
-	if start != -1 and end != -1:
+        if mem_after != -1 and mem_before != -1:
             out.write("Memory used: " + str(mem_after - mem_before) + ' Bytes' + '\n')
 
         for pat in sorted(result_mining, key=lambda x: x[1]):

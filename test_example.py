@@ -3,16 +3,15 @@ import pandas as pd
 from ast import literal_eval
 
 path = './datasets'
-path_res='%s/C10T8S8I8.csv' %(path)
+path_res='%s/pei_dataset.csv' %(path)
 
 threshold = 0.2
 options = {'threshold': threshold}
 
-data = pd.read_csv(path_res, sep=",", header=-1, names=['sid','sequence'] 
-                   converters={"sequence": literal_eval})
+data = pd.read_csv(path_res, sep=",", header=-1, names=['sid','sequence'],converters={"sequence": literal_eval})
 sids = list(data["sid"])
 sequences = list(data["sequence"])
-items_separated = True
+items_separated = False
 
 import copper.dataprocessor as dp
 seq = dp.discretize_sequences(sequences, items_separated)

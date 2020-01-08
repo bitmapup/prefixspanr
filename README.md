@@ -114,10 +114,13 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
 ```python
     import copper.prefixspan as ps
     import time
+    import copper.profiling as pro
+    mem_before = pro.get_process_memory()
     start = time.time()
     result_mining = ps.prefixspan(s_db, options)
     end = time.time()
-    # this part measure time to processing, but this is optional
+    mem_after = pro.get_process_memory()
+    # this part measure time and memory consume of processing, this is optional
 ```
 
 - Decode dataset with original values
