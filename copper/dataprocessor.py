@@ -39,9 +39,16 @@ def get_unique_items(database, item_separated=False):
     sequence_set = []
 
     if not item_separated:
+        #for sequence in database:
+        #    for item in sequence:
+        #        sequence_set += item
         for sequence in database:
-            for item in sequence:
-                sequence_set += item
+            for itemset in sequence:
+                if type(itemset) == list:
+                    for item in itemset:
+                        sequence_set.append(item)
+                else:
+                    sequence_set.append(itemset)
     else:
         for item in database:
             sequence_set += item
@@ -78,14 +85,24 @@ def discretize_sequences(raw_db, item_separated=False):
 
     db = []
     if not item_separated:
+        # for sequence in raw_db:
+        #     row = []
+        #     for itemset in sequence:
+        #         itemset_part = ''
+        #         for item in itemset:
+        #             itemset_part = itemset_part + ' ' + discrete_sequence[item]
+        #         row.append(itemset_part.strip())
+        #     db.append(row)
         for sequence in raw_db:
             row = []
             for itemset in sequence:
-                itemset_part = ''
-                for item in itemset:
-                    itemset_part = itemset_part + ' ' + discrete_sequence[item]
-
-                row.append(itemset_part.strip())
+                if type(itemset) == list:
+                    cell = []
+                    for item in itemset:
+                        cell.append(discrete_sequence[item])
+                    row.append(cell)
+                else:
+                    row.append(discrete_sequence[itemset])
             db.append(row)
     else:
         for sequence in raw_db:
@@ -145,9 +162,10 @@ def pattern_to_list(result_patterns):
         for ch in row_pattern[0]:
             if ch != '<'and ch != '>' and ch != ' ' and ch != ',':
                 itemset += ch
+                itemset += ' '
 
             if ch == '>':
-                pattern.append(itemset)
+                pattern.append(itemset.split( ))
                 itemset = ''
         result_pattern_list.append([pattern, row_pattern[1]])
     return result_pattern_list
@@ -178,13 +196,26 @@ def undiscretize_sequences(raw_db, result_pattern_list, item_separated=False):
     result_pattern = pattern_to_list(result_pattern_list)
     encoded_result = []
     if not item_separated:
+        # for pattern in result_pattern:
+        #     pattern_encoded = []
+        #     for itemset in pattern[0]:
+        #         item_part = ''
+        #         for item in itemset:
+        #             item_part = item_part + undiscrete_sequence[item]
+        #         pattern_encoded.append(item_part)
+        #     encoded_result.append([pattern_encoded, pattern[1]])
         for pattern in result_pattern:
             pattern_encoded = []
+            print(pattern)
             for itemset in pattern[0]:
-                item_part = ''
-                for item in itemset:
-                    item_part = item_part + undiscrete_sequence[item]
-                pattern_encoded.append(item_part)
+                if type(itemset) == list:
+                    cell = []
+                    for item in itemset:
+                        cell.append(undiscrete_sequence[item])
+                    pattern_encoded.append(cell)
+                else:
+                    pattern_encoded.append(undiscrete_sequence[itemset])
+                
             encoded_result.append([pattern_encoded, pattern[1]])
     else:
         for pattern in result_pattern:

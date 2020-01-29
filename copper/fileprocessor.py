@@ -203,8 +203,14 @@ def db_to_spmf(db):
     for sequence in db:
         str_sequence = ""
         for itemset in sequence:
-            str_sequence += str(itemset)
-            str_sequence += " -1 "
+            if type(itemset) == list:
+                for item in itemset:
+                    str_sequence += str(item)
+                    str_sequence += " "
+                str_sequence += "-1 "
+            else:
+                str_sequence += str(itemset)
+                str_sequence += " -1 "
         str_sequence += "-2 \n"
         spmf_db.append(str_sequence)
     return spmf_db

@@ -70,7 +70,7 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
 
 ## Requirements
 - Data should be readed in csv format
-- Only the part of sequences will be processed without identificator of sequences
+- Only the part of sequences will be processed without identificators of sequences
 
 ## How to use
 - First read a data file
@@ -91,7 +91,7 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
     # e.g sequences = [['a',b','c'], ['a', 'b']]
     items_separated = True
     # otherwise the itemsets are separated by colons (False) [Default]
-    # e.g sequences = [['ab', 'a', 'bc'], ['aa', 'bc']]
+    # e.g sequences = [[['a','b'], 'a', ['b','c']], [['a','a'], ['b','c']]]
     items_separated = False
     seq = dp.discretize_sequences(sequences, items_separated)
 ```

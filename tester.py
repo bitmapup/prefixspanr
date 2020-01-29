@@ -6,9 +6,14 @@ import copper.prefixspan as ps
 import time
 import copper.profiling as pro
 
-def test_file(support, time, memory, results):
-    with open('results_.csv', 'a') as f:
-        f.write(str(support)+','+str(time*1000)+','+str(memory*10^6)+','+str(len(results))+'\n')
+def test_file(support, time, memory, max_memory, results):
+    # structure ==> support, time, memory, max memory, patterns
+    # time in seconds
+    # memory in MBs
+    # max memory in MBs
+    # patterns: quantity of patterns
+    with open('results_copper_test.csv', 'a') as f:
+        f.write(str(support)+','+str(time*1000)+','+str(memory/10**6)+','+str(max_memory/10**3)+','+str(len(results))+'\n')
 
 if __name__ == "__main__":
     path = './datasets'
@@ -31,13 +36,17 @@ if __name__ == "__main__":
         s_db = fp.readDB(u_db, options)
 
         mem_before = pro.get_process_memory()
+        mem_max_before = pro.get_max_resident_memory()
         start = time.time()
         result_mining = ps.prefixspan(s_db, options)
         end = time.time()
+        mem_max_after = pro.get_max_resident_memory()
         mem_after = pro.get_process_memory()
         result_mining_undiscretize = dp.undiscretize_sequences(sequences, result_mining, items_separated)
         time_e = end - start
         memory_u = mem_after - mem_before
-        test_file(threshold, time_e, memory_u, result_mining_undiscretize)
+        memory_max = mem_max_after - mem_max_before
+
+        test_file(threshold, time_e, memory_u, memory_max, result_mining_undiscretize)
 
         threshold += 0.01 
