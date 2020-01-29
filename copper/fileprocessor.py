@@ -253,7 +253,7 @@ def get_result_file_name(base, options):
     return outfile
 
 
-def get_result_file(result_mining, options, start=-1, end=-1, mem_after=-1, mem_before=-1, base='Results'):
+def get_result_file(result_mining, options, time_start=-1, time_end=-1, mem_after=-1, mem_before=-1, mem_max_after=-1, mem_max_before=-1, base='Results'):
     """
     Obtain summary results file of mining
 
@@ -265,9 +265,17 @@ def get_result_file(result_mining, options, start=-1, end=-1, mem_after=-1, mem_
         Database in string in format of spmf
     options : dict
 
-    start: float
+    time_start: float
+        time of start process
+    time_end: float
+        time of end process
+    mem_before: float
 
-    end: float
+    mem_after: float
+
+    mem_max_before: float
+
+    mem_max_after: float
 
     base: string
 
@@ -280,11 +288,14 @@ def get_result_file(result_mining, options, start=-1, end=-1, mem_after=-1, mem_
     with open(outfile, "w") as out:
         out.write("Options: " + str(options) + '\n')
         out.write("Patterns Found: " + str(len(result_mining)) + ' patterns' + '\n')
-        if start != -1 and end != -1:
-            out.write("Time Taken: " + str(end - start) + ' seconds' + '\n')
+        if time_start != -1 and time_end != -1:
+            out.write("Time Taken: " + str(time_end - time_start) + ' seconds' + '\n')
 
         if mem_after != -1 and mem_before != -1:
             out.write("Memory used: " + str(mem_after - mem_before) + ' Bytes' + '\n')
+        
+        if mem_max_after != -1 and mem_max_before != -1:
+            out.write("Max Memory used: " + str(mem_max_after - mem_max_before) + ' Bytes' + '\n')
 
         for pat in sorted(result_mining, key=lambda x: x[1]):
                 out.write(str(pat) + '\n')

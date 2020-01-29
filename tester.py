@@ -37,16 +37,16 @@ if __name__ == "__main__":
 
         mem_before = pro.get_process_memory()
         mem_max_before = pro.get_max_resident_memory()
-        start = time.time()
+        time_start = time.time()
         result_mining = ps.prefixspan(s_db, options)
-        end = time.time()
+        time_end = time.time()
         mem_max_after = pro.get_max_resident_memory()
         mem_after = pro.get_process_memory()
         result_mining_undiscretize = dp.undiscretize_sequences(sequences, result_mining, items_separated)
-        time_e = end - start
+        time_e = time_end - time_start
         memory_u = mem_after - mem_before
         memory_max = mem_max_after - mem_max_before
 
         test_file(threshold, time_e, memory_u, memory_max, result_mining_undiscretize)
-
+        fp.get_result_file(result_mining_undiscretize, options, time_start, time_end, mem_after, mem_before, mem_max_after, mem_max_before)
         threshold += 0.01 

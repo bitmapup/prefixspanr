@@ -3,7 +3,7 @@ import pandas as pd
 from ast import literal_eval
 
 path = './datasets'
-path_res='%s/pei_dataset.csv' %(path)
+path_res='%s/pei_dataset_modif.csv' %(path)
 
 threshold = 0.2
 options = {'threshold': threshold}
@@ -24,10 +24,13 @@ import copper.prefixspan as ps
 import time
 import copper.profiling as pro
 mem_before = pro.get_process_memory()
-start = time.time()
+mem_max_before = pro.get_max_resident_memory()
+time_start = time.time()
 result_mining = ps.prefixspan(s_db, options)
-end = time.time()
+time_end = time.time()
+mem_max_after = pro.get_max_resident_memory()
 mem_after = pro.get_process_memory()
+memory_max = mem_max_after - mem_max_before
 
 result_mining_undiscretize = dp.undiscretize_sequences(data, result_mining)
-fp.get_result_file(result_mining_undiscretize, options, start, end)
+fp.get_result_file(result_mining_undiscretize, options, time_start, time_end, mem_after, mem_before, mem_max_after, mem_max_before)
