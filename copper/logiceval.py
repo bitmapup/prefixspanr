@@ -177,7 +177,10 @@ class Tree:
 
         """
         if type(dictionary) == Pattern:
-            dictionary = str(dictionary).replace('<', '').replace('>', '').split(', ')
+            if ',' in str(dictionary):
+                dictionary = str(dictionary).replace('<', '').replace('>', '').split(', ')
+            else:
+                dictionary = str(dictionary).replace('><', ',').replace('<', '').replace('>', '').split(',')
 
         if self.left:
             l = self.left.evaluate(dictionary)

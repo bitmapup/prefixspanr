@@ -82,9 +82,8 @@ def discretize_sequences(raw_db, item_separated=False):
     """
     sequence_set = get_unique_items(raw_db, item_separated)
     discrete_sequence = {sequence_set[i]: str(i + 1) for i in range(0, len(sequence_set))}
-
     db = []
-    if not item_separated:
+    if item_separated == False:
         # for sequence in raw_db:
         #     row = []
         #     for itemset in sequence:
@@ -160,12 +159,14 @@ def pattern_to_list(result_patterns):
     for row_pattern in str_result_patterns:
         pattern = []
         for ch in row_pattern[0]:
-            if ch != '<'and ch != '>' and ch != ' ' and ch != ',':
+            if ch != '<'and ch != '>' and ch != ' ':
                 itemset += ch
-                itemset += ' '
 
             if ch == '>':
-                pattern.append(itemset.split( ))
+                if ',' in itemset:
+                    pattern.append(itemset.split(','))
+                else:
+                    pattern.append(itemset)
                 itemset = ''
         result_pattern_list.append([pattern, row_pattern[1]])
     return result_pattern_list
@@ -195,7 +196,7 @@ def undiscretize_sequences(raw_db, result_pattern_list, item_separated=False):
     
     result_pattern = pattern_to_list(result_pattern_list)
     encoded_result = []
-    if not item_separated:
+    if item_separated == False:
         # for pattern in result_pattern:
         #     pattern_encoded = []
         #     for itemset in pattern[0]:
@@ -206,7 +207,6 @@ def undiscretize_sequences(raw_db, result_pattern_list, item_separated=False):
         #     encoded_result.append([pattern_encoded, pattern[1]])
         for pattern in result_pattern:
             pattern_encoded = []
-            print(pattern)
             for itemset in pattern[0]:
                 if type(itemset) == list:
                     cell = []
@@ -223,5 +223,35 @@ def undiscretize_sequences(raw_db, result_pattern_list, item_separated=False):
             for itemset in pattern[0]:
                 pattern_encoded.append(undiscrete_sequence[itemset])
             encoded_result.append([pattern_encoded, pattern[1]])
-
     return encoded_result
+
+
+def encode_logic(options, raw_db):
+    logic = str(options['logic'])
+    logic = ''.join(logic.split())
+    encoded = ''
+    item = ''
+    i = 0
+    sequence_set = get_unique_items(raw_db)
+    discrete_sequence = {sequence_set[i]: str(i + 1) for i in range(0, len(sequence_set))}
+    while True:
+        
+        if logic[i] != '(' and logic[i] != '|' and logic[i] != '&' and logic[i] != ')':
+            item += logic[i]
+            i += 1
+
+        if logic[i] == '(':
+            encoded += logic[i]
+            i += 1
+
+        if logic[i] == '|' or logic[i] =='&' or logic[i] == ')':
+            item = discrete_sequence[item]
+            encoded += item
+            encoded += logic[i]
+            item = ''
+            i += 1
+                
+        if i >= len(logic):
+            break
+
+    return encoded
