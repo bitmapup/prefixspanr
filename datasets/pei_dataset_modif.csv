@@ -1,5 +1,3 @@
-sid,sequence
-10,"['a' , ['a','b','c'] , ['a','c'] , 'd' , ['c','f']]"
-20,"[['a','d'] , 'c' , ['b','c'] , ['a','e']]"
-30,"[['e','f'] , ['a','b'] , ['d','f'] , ['c','b']]"
-40,"['e' , 'g' , ['a','f'] , 'c' , 'b', 'c']"
+version https://git-lfs.github.com/spec/v1
+oid sha256:7d6902df19bef89e49ac46a72b2c04da682fbd14b7f2cb27df81968dedabe793
+size 215
