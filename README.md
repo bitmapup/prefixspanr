@@ -47,8 +47,8 @@ options = {'threshold' : number, 'window' : number, 'gap' : number}
 - **threshold:** support of patterns
   * if threshold value is *integer* means the size of sequences (Absolute Support)
   * if threshold value is *float* means the percent of size of database (Ratio Support)
-- **window:**   windows between itemsets constraint
-- **gap:**      maxgap between itemsets constraint
+- **window:**   maximum windows size between itemsets constraint
+- **gap:**      maximum gap between itemsets constraint
 
 **4) COPPER with time constraints (WinCopper)**
 ```python
@@ -65,8 +65,8 @@ options = {'threshold' : number, 'minSseq': number, 'maxSseq': number, 'minSize'
 - **logic:**    soft inclusion constraint
   * OR relation '(s1 | s2)'
   * AND relation '(s1 & s2)'
-- **window:**   windows between itemsets constraint
-- **gap:**      limit gap between itemsets constraint
+- **window:**   maximum windows size between itemsets constraint
+- **gap:**      maximum gap between itemsets constraint
 
 ## Requirements
 - Data should be readed in csv format
