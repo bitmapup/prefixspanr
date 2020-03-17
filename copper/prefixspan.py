@@ -22,6 +22,7 @@ from seqpattern import Pattern
 from dbpointer import DBPointer, CopperPointer, WindowGapPointer, WinCopPointer
 from infinity import Infinity
 import logiceval
+import dataprocessor as dp
 
 
 def __parse_db__(db):
@@ -118,18 +119,22 @@ def __parse_options__(options):
     if any( param in options for param in ['window', 'gap']):
         options['DBPointer'] = WindowGapPointer
         if 'gap' in options:
+            options['gapVal'] = options['gap']
             gap = options['gap'] + 1
             options['gap'] = lambda x, y: map(lambda z: [z + 1, min(z + gap + 1, y)], x)
         else:
+            options['gapVal'] = 'default'
             options['gap'] = lambda x, y: [[x[0] + 1, y]]
         if 'window' in options:
+            options['winVal'] = options['window']
             window = options['window']
             options['window'] = lambda x, y: map(lambda z: [z + 1, min(z + window + 1, y)], x)
         else:
+            options['winVal'] = 'default'
             options['window'] = lambda x, y: [[0, y]]
     # WinCopper
     # if 'logic' in options and 'gap' in options:
-    if all( param in options for param in ['minSseq', 'maxSseq', 'minSize', 'maxSize', 'windows', 'gap']):
+    if all( param in options for param in ['minSseq', 'minSize', 'window', 'gap']):
         options['DBPointer'] = WinCopPointer
     return options
 

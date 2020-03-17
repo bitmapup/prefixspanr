@@ -10,7 +10,10 @@ def get_process_memory():
     return process.memory_info().rss
 
 def get_max_resident_memory():
+    #if platform.system() == 'Linux':
     return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    #elif platform.system() == 'Windows':
+    #    return process.memory_info().peak_wset
 
 def format_bytes(bytes):
     if abs(bytes) < 1000:

@@ -16,6 +16,7 @@ __status__ = "Proof of Concept (POC)"
 """
 
 from dbpointer import DBPointer, CopperPointer, WindowGapPointer, WinCopPointer
+from infinity import Infinity
 import math
 
 
@@ -236,18 +237,46 @@ def get_result_file_name(base, options):
     for opt in options:
         if opt == 'DBPointer':
             if options[opt] == DBPointer:
-                outfile += 'PrefixSpan'
+                #outfile += 'PrefixSpan'
+                outfile += 'ps' + '_'
             elif options[opt] == CopperPointer:
-                outfile += 'Copper'
+                #outfile += 'Copper'
+                outfile += 'copper' + '_'
             elif options[opt] == WinCopPointer:
-                outfile += 'Windowed-Cooper'
+                #outfile += 'Windowed-Cooper'
+                outfile += 'wincopper' + '_'
             elif options[opt] == WindowGapPointer:
-                outfile += 'Window-Gap'
+                #outfile += 'Window-Gap'
+                outfile += 'wingap' + '_'
         elif opt == 'Pattern':
             continue
+        elif opt == 'winVal':
+            continue
+        elif opt == 'gapVal':
+            continue
+        elif opt == 'minSize':
+            outfile += 'miis_' + str(options[opt]) + '_'
+        elif opt == 'maxSize':
+            if isinstance(options[opt], Infinity):
+                outfile += 'mais_Inf_'
+            else:
+                outfile += 'mais_' + str(options[opt]) + '_'
+        elif opt == 'minSseq':
+            outfile += 'miss_' + str(options[opt]) + '_'
+        elif opt == 'maxSseq':
+            if isinstance(options[opt], Infinity):
+                outfile += 'mass_Inf_'
+            else:
+                outfile += 'mass_' + str(options[opt]) + '_'
+        elif opt == 'logic':
+            if options[opt] == (lambda x: True):
+                outfile += 'l_true_'
+        elif opt == 'window':
+            outfile += 'win_' + str(options['winVal']) + '_'
+        elif opt == 'gap':
+            outfile += 'gap_' + str(options['gapVal']) + '_'
         else:
-            outfile += str(opt[0]) + str(options[opt])
-        outfile += "_"
+            outfile += str(opt[0]) + "_" + str(options[opt]) + '_'
 
     outfile += '.txt'
     return outfile
