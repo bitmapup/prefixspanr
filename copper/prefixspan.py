@@ -23,6 +23,10 @@ from dbpointer import DBPointer, CopperPointer, WindowGapPointer, WinCopPointer
 from infinity import Infinity
 import logiceval
 import dataprocessor as dp
+import copper.fileprocessor as fp
+import copper.profiling as pro
+import math
+import time
 
 
 def __parse_db__(db):
@@ -95,9 +99,12 @@ def __parse_options__(options):
 
     # Standard prefixspan
     options['DBPointer'] = DBPointer
+    options['algorithm'] = "PrefixSpan"
+    
     # COPPER
     if any( param in options for param in ['minSseq','maxSseq','minSize','maxSize']):
         options['DBPointer'] = CopperPointer
+        options['algorithm'] = "Copper"
         if 'logic' not in options:
             options['logic'] = lambda x: True
         else:
@@ -118,6 +125,7 @@ def __parse_options__(options):
     # Window
     if any( param in options for param in ['window', 'gap']):
         options['DBPointer'] = WindowGapPointer
+        options['algorithm'] = "WinGap"
         if 'gap' in options:
             options['gapVal'] = options['gap']
             gap = options['gap'] + 1
@@ -136,6 +144,7 @@ def __parse_options__(options):
     # if 'logic' in options and 'gap' in options:
     if all( param in options for param in ['minSseq', 'minSize', 'window', 'gap']):
         options['DBPointer'] = WinCopPointer
+        options['algorithm'] = "WinCopper"
     return options
 
 
@@ -217,7 +226,7 @@ def __prefixspan__(u_pointerdb, u_pattern, options, freqpatterns):
     for entry in (entry.project(u_pattern, options) for entry in u_pointerdb):
         if entry:
             pointerdb.append(entry)
-    freqpatterns.append([u_pattern, len(pointerdb)])
+    freqpatterns.append([u_pattern, len(pointerdb), float(len(pointerdb))/float(options['databaseLen'])])
 
     # Assemble - Get assemble candidates
     candidates = __itembag_merge__(map(lambda e: e.assemblecandidates(options), pointerdb))
@@ -237,7 +246,8 @@ def __prefixspan__(u_pointerdb, u_pattern, options, freqpatterns):
     return
 
 
-def prefixspan(u_db, u_options):
+def prefixspan(sequences, u_options):
+#def prefixspan(u_db, u_options):
     """
     Prefixspan entry call, takes a database in the null separator
     format and a dictionary of options and returns frequent patterns
@@ -258,8 +268,38 @@ def prefixspan(u_db, u_options):
         frequent patterns list
 
     """
-    p_db, z2i, ibag = __parse_db__(u_db)
+
+    u_options['minSeqLen'] = dp.getMinSeqLen(sequences)
+    u_options['maxSeqLen'] = dp.getMaxSeqLen(sequences)
+    u_options['avgSeqLen'] = dp.getAvgSeqLen(sequences)
+
+    u_options['minISLen'] = dp.getMinitemsetsLen(sequences)
+    u_options['maxISLen'] = dp.getMaxitemsetsLen(sequences)
+    u_options['avgISLen'] = dp.getAvgitemsetsLen(sequences)
+
+    u_options['quantDiffitems'] = len(dp.get_unique_items(sequences, u_options['itemsSeparated']))
+
+    u_options['databaseLen'] = len(sequences)
+    
+    # ratio threshold -- separate
+    if type(u_options['threshold']) == float:
+        u_options['thresholdRatio'] = u_options['threshold']
+        u_options['threshold'] = int(math.ceil(u_options['threshold'] * u_options['databaseLen']))
+    elif type(u_options['threshold']) == int:
+        u_options['thresholdRatio'] = round(float(u_options['threshold']) / float(u_options['databaseLen']), 2)
+
+    seq = dp.discretize_sequences(sequences, u_options['itemsSeparated'])
+    u_db = fp.db_to_spmf(seq)
+    s_db = fp.readDB(u_db, u_options)
+
     options = __parse_options__(u_options)
+    #p_db, z2i, ibag = __parse_db__(u_db)
+    p_db, z2i, ibag = __parse_db__(s_db)
+
+    mem_before = pro.get_process_memory()
+    mem_max_before = pro.get_max_resident_memory()
+    time_start = time.time()
+
     candidates = __ffi__(options['threshold'], ibag)
     db = map(lambda seq: map(lambda iset: filter(lambda x: x in candidates, iset), seq), p_db)
     pointerdb = [options['DBPointer'](z_id, db) for z_id in range(len(db))]
@@ -271,5 +311,14 @@ def prefixspan(u_db, u_options):
         freqpatterns = list(filter(lambda x: options['logic'](x[0])
                             and options['minSize'] <= len(x[0])
                             and options['minSseq'] <= x[0].size(), freqpatterns))
-    return freqpatterns
+    
+    time_end = time.time()
+    mem_max_after = pro.get_max_resident_memory()
+    mem_after = pro.get_process_memory()
+
+    freqpatterns_c = dp.undiscretize_sequences(sequences, freqpatterns, options['itemsSeparated'])
+    #return freqpatterns
+    fp.get_result_file(freqpatterns_c, options, time_start, time_end, mem_after, mem_before, mem_max_after, mem_max_before)
+    
+    return freqpatterns_c
 

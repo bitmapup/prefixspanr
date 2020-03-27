@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import numpy as np
+
 """
 dataprocessor.py: module for preprocess and postprocess data.
 
@@ -168,7 +170,7 @@ def pattern_to_list(result_patterns):
                 else:
                     pattern.append(itemset)
                 itemset = ''
-        result_pattern_list.append([pattern, row_pattern[1]])
+        result_pattern_list.append([pattern, row_pattern[1], row_pattern[2]])
     return result_pattern_list
 
 
@@ -216,13 +218,13 @@ def undiscretize_sequences(raw_db, result_pattern_list, item_separated=False):
                 else:
                     pattern_encoded.append(undiscrete_sequence[itemset])
                 
-            encoded_result.append([pattern_encoded, pattern[1]])
+            encoded_result.append([pattern_encoded, pattern[1], pattern[2]])
     else:
         for pattern in result_pattern:
             pattern_encoded = []
             for itemset in pattern[0]:
                 pattern_encoded.append(undiscrete_sequence[itemset])
-            encoded_result.append([pattern_encoded, pattern[1]])
+            encoded_result.append([pattern_encoded, pattern[1], pattern[2]])
     return encoded_result
 
 
@@ -255,3 +257,40 @@ def encode_logic(options, raw_db):
             break
 
     return encoded
+
+def getSeqsLen(sequences):
+    len_seq = []
+    for sequence in sequences:
+        len_seq.append(len(sequence))
+    return np.array(len_seq)
+
+def getMaxSeqLen(sequences):
+    return max(getSeqsLen(sequences))
+
+def getMinSeqLen(sequences):
+    return min(getSeqsLen(sequences))
+
+def getAvgSeqLen(sequences):
+    return int(round(np.mean(getSeqsLen(sequences)),0))
+
+def getItemsetsLen(sequences):
+    len_is = []
+    for sequence in sequences:
+        for itemset in sequence:
+            if type(itemset) == list:
+                len_is.append(len(itemset))
+            else:
+                len_is.append(len([itemset]))
+
+    return np.array(len_is)
+
+def getMaxitemsetsLen(sequences):
+    return max(getItemsetsLen(sequences))
+
+def getMinitemsetsLen(sequences):
+    return min(getItemsetsLen(sequences))
+
+def getAvgitemsetsLen(sequences):
+    return int(round(np.mean(getItemsetsLen(sequences)),0))
+
+

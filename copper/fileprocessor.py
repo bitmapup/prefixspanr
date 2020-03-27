@@ -17,7 +17,7 @@ __status__ = "Proof of Concept (POC)"
 
 from dbpointer import DBPointer, CopperPointer, WindowGapPointer, WinCopPointer
 from infinity import Infinity
-import math
+import dataprocessor as dp
 
 
 def readDB(u_db, options):
@@ -39,10 +39,7 @@ def readDB(u_db, options):
     List(String)
         Database formated in a list
     """
-    # ratio threshold -- separate
-    if type(options['threshold']) == float:
-        options['threshold'] = int(math.ceil(options['threshold'] * len(u_db)))
-
+    
     if 'format' not in options:
         options['format'] = 'spmf'
 
@@ -184,6 +181,7 @@ def minOneFormater(moDB):
     return patterndb
 
 
+
 def db_to_spmf(db):
     """
     Convert database in csv format to spmf format
@@ -248,11 +246,33 @@ def get_result_file_name(base, options):
             elif options[opt] == WindowGapPointer:
                 #outfile += 'Window-Gap'
                 outfile += 'wingap' + '_'
+        elif opt == 'algorithm':
+            continue
         elif opt == 'Pattern':
+            continue
+        elif opt == 'thresholdRatio':
             continue
         elif opt == 'winVal':
             continue
+        elif opt == 'databaseLen':
+            continue
         elif opt == 'gapVal':
+            continue
+        elif opt == 'minSeqLen':
+            continue
+        elif opt == 'maxSeqLen':
+            continue
+        elif opt == 'avgSeqLen':
+            continue
+        elif opt == 'minISLen':
+            continue
+        elif opt == 'maxISLen':
+            continue
+        elif opt == 'avgISLen':
+            continue
+        elif opt == 'itemsSeparated':
+            continue
+        elif opt == 'quantDiffitems':
             continue
         elif opt == 'minSize':
             outfile += 'miis_' + str(options[opt]) + '_'
@@ -311,20 +331,64 @@ def get_result_file(result_mining, options, time_start=-1, time_end=-1, mem_afte
     Returns
     -------
     File
-		
+        
     """
     outfile = get_result_file_name(base, options)
     with open(outfile, "w") as out:
-        out.write("Options: " + str(options) + '\n')
-        out.write("Patterns Found: " + str(len(result_mining)) + ' patterns' + '\n')
+        #out.write("Options: " + str(options) + '\n')
+        
+        out.write("{")
+        out.write("\'algorithm\': " + "\'" + str(options['algorithm']) + "\'" + ", ")
+        out.write("\'format\': " + "\'" + str(options['format']) + "\'" +  ", ")
+        #out.write("================== Dataset Description ==================\n")
+        out.write("\'DBsize\': " + str(options['databaseLen']) + ", ")
+        out.write("\'DBmaxSeqLen\': " + str(options['maxSeqLen']) + ", ")
+        out.write("\'DBminSeqLen\': " + str(options['minSeqLen']) + ", ")
+        out.write("\'DBavgSeqLen\': " + str(options['avgSeqLen']) + ", ")
+        out.write("\'DBmaxISLen\': " + str(options['maxISLen']) + ", ")
+        out.write("\'DBminISLen\': " + str(options['minISLen']) + ", ")
+        out.write("\'DBavgISLen\': " + str(options['avgISLen']) + ", ")
+        out.write("\'quantDiffitems\': " + str(options['quantDiffitems']) + ", ")
+
+        #out.write("================== Analysis Description ==================\n")
+        out.write("\'absMinSupp\': " + str(options['threshold']) + ", ")
+        out.write("\'relMinSupp\': " + str(options['thresholdRatio']) + ", ")
+        out.write("\'pattFound\': " + str(len(result_mining)))
         if time_start != -1 and time_end != -1:
-            out.write("Time Taken: " + str(time_end - time_start) + ' seconds' + '\n')
+            out.write(", " + "\'Time\': " + str(time_end - time_start))
 
         if mem_after != -1 and mem_before != -1:
-            out.write("Memory used: " + str(mem_after - mem_before) + ' Bytes' + '\n')
+            out.write(", " + "\'memory\': " + str(mem_after - mem_before))
         
         if mem_max_after != -1 and mem_max_before != -1:
-            out.write("Max Memory used: " + str(mem_max_after - mem_max_before) + ' Bytes' + '\n')
+            out.write(", " + "\'maxMemory\': " + str(mem_max_after - mem_max_before))
+
+        #if ('maxSseq' in options or 'minSseq' in options or 'maxSize' in options or 
+        #   'minSize' in options or 'window' in options or 'gap' in options):
+        
+        #out.write("================== Constraints Description ==================\n")
+
+        if 'maxSseq' in options and 'minSseq' in options:
+            out.write(", " + "\'minSeqcons\': " + str(options['minSseq']))
+            if type(options['maxSseq']) != Infinity:
+                out.write(", " + "\'maxSeqcons\': " + str(options['maxSseq']))
+            else:
+                out.write(", " + "\'maxSeqcons\': " + "Infinity")
+        
+        if 'maxSize' in options and 'minSize' in options:
+            out.write(", " + "\'minIScons\': " + str(options['minSize']))
+            if type(options['maxSize']) != Infinity:
+                out.write(", " + "\'maxIscons\': " + str(options['maxSize']))
+            else:
+                out.write(", " + "\'maxIscons\': " + "Infinity")
+        
+        if 'window' in options:
+            out.write(", " + "\'windowscons\': " + str(options['winVal']))
+
+        if 'gap' in options:
+            out.write(", " + "\'gapcons\' " + str(options['gapVal']))
+        
+        out.write("}\n")
 
         for pat in sorted(result_mining, key=lambda x: x[1]):
-                out.write(str(pat) + '\n')
+            out.write(str(pat) + '\n')

@@ -190,6 +190,14 @@ class Tree:
         if self.right:
             r = self.right.evaluate(dictionary)
 
+        if l:
+            if self.root == '¬':
+                return not l
+
+        if r:
+            if self.root == '¬':
+                return not r
+
         if l and r:
             # if token == '&':
             if self.root == '&':
