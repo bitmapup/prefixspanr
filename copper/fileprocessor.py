@@ -371,22 +371,28 @@ def get_result_file(result_mining, options, time_start=-1, time_end=-1, mem_afte
         if 'maxSseq' in options and 'minSseq' in options:
             out.write(", " + "\'minSeqcons\': " + str(options['minSseq']))
             if type(options['maxSseq']) != Infinity:
-                out.write(", " + "\'maxSeqcons\': " + str(options['maxSseq']))
+                out.write(", " + "\'maxSeq\': " + "Yes")
+                out.write(", " + "\'maxSeq value\': " + str(options['maxSseq']))
             else:
-                out.write(", " + "\'maxSeqcons\': " + "Infinity")
+                out.write(", " + "\'maxSeq\': " + "No")
+                out.write(", " + "\'maxSeq value\': " + "Infinity")
         
         if 'maxSize' in options and 'minSize' in options:
             out.write(", " + "\'minIScons\': " + str(options['minSize']))
             if type(options['maxSize']) != Infinity:
-                out.write(", " + "\'maxIscons\': " + str(options['maxSize']))
+                out.write(", " + "\'maxIS\': " + "Yes")
+                out.write(", " + "\'maxIs value\': " + str(options['maxSize']))
             else:
-                out.write(", " + "\'maxIscons\': " + "Infinity")
+                out.write(", " + "\'maxIS\': " + "No")
+                out.write(", " + "\'maxIs value\': " + "Infinity")
         
         if 'window' in options:
-            out.write(", " + "\'windowscons\': " + str(options['winVal']))
+            out.write(", " + "\'windows\': " + "Yes")
+            out.write(", " + "\'windows value\': " + str(options['winVal']))
 
         if 'gap' in options:
-            out.write(", " + "\'gapcons\' " + str(options['gapVal']))
+            out.write(", " + "\'gap\': " + "Yes")
+            out.write(", " + "\'gap value\' " + str(options['gapVal']))
         
         out.write("}\n")
 
