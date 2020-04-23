@@ -3,17 +3,19 @@
 
 import os
 import psutil
-import resource
+
 
 def get_process_memory():
     process = psutil.Process(os.getpid())
     return process.memory_info().rss
 
 def get_max_resident_memory():
-    #if platform.system() == 'Linux':
-    return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    #elif platform.system() == 'Windows':
-    #    return process.memory_info().peak_wset
+    if psutil.LINUX:
+		import resource
+		return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    elif psutil.WINDOWS:
+        process = psutil.Process(os.getpid())
+        return process.memory_info().peak_wset
 
 def format_bytes(bytes):
     if abs(bytes) < 1000:
