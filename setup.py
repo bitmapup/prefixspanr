@@ -31,5 +31,5 @@ setup(
         "Programming Language :: Python :: 2",
         "License :: OSI Approved :: GNU Public License",
     ],
-    python_requires='==2.7'
+    python_requires='>=2.7'
 )
