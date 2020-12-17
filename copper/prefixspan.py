@@ -1,21 +1,13 @@
 # -*- coding: utf-8 -*-
 
 """
-prefixsan.py: Implementation of Jiawei Han, Jian Pei, Behzad Mortazavi-Asl,
+Implementation of Jiawei Han, Jian Pei, Behzad Mortazavi-Asl,
 Helen Pinto, Qiming Chen, Umeshwar Dayal, MC Hsu, Prefixspan Algorithm
 in Python.
-With additional capabilities added from Guevara-Cogorno, Flamand,
-Alatrista Salas, COPPER Paper and Window/Time Gap Capabilities added.
 
-__author__ = "Agustin Guevara Cogorno"
-__copyright__ = "Copyright 2015, Copper Package"
-__license__ = "GPL"
-__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
-__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
-__email__ = "ye.maeharaa@up.edu.pe"
-__institution_ = "Universidad del Pacifico"
-__version__ = "1.1"
-__status__ = "Proof of Concept (POC)"
+With constraints added from Guevara-Cogorno, Flamand,
+Alatrista-Salas in COPPER Paper and Window/Time Gap constraints added from Alatrista-Salas, Guevara-Cogorno,
+Maehara, Nuñez del Prado in WinCOPPER Paper.
 """
 
 from seqpattern import Pattern
@@ -23,10 +15,37 @@ from dbpointer import DBPointer, CopperPointer, WindowGapPointer, WinCopPointer
 from infinity import Infinity
 import logiceval
 import dataprocessor as dp
-import copper.fileprocessor as fp
-import copper.profiling as pro
+import fileprocessor as fp
+import profiling as pro
 import math
 import time
+
+
+def validate_db(db, options):
+    """
+    validate if database contain only 1-itemsets or
+    contain any k-itemset and is setted correctly
+
+    Parameters
+    ----------
+    db : string
+        Database to validate
+    options: dict
+        options used to configure
+
+    Returns
+    -------
+    boolean
+        Value of validation
+
+    """    
+    valid = True
+    for sequence in db:
+        for itemset in sequence:
+            if type(itemset) == list and options['itemsSeparated']:
+                valid = False
+    
+    return valid
 
 
 def __parse_db__(db):
@@ -35,24 +54,22 @@ def __parse_db__(db):
     and parses them into the db, a converter from zone to zone_id
     and a frequency dictionary each item on the database.
 
-    Extended description of function.
-
     Parameters
     ----------
-    db : string
-        Logical expression to evaluate
+    db : list
+        Database in string format
 
     Returns
     -------
-    List, Integer, List
+    list, int, list
         Database Parsed in format, zone2int, itembag
 
     """
     zone2int = {}
-    parseddb = []
+    parsed_db = []
     itembag = {}
     for line in db:
-        sequencebag = set()
+        sequence_bag = set()
         sequence = []
         i = line.split('\0')
         if i[0] not in zone2int:
@@ -61,16 +78,16 @@ def __parse_db__(db):
             iset = set()  # !
             for item in itemset.split('|'):
                 if item:
-                    sequencebag.add(int(item))
+                    sequence_bag.add(int(item))
                     iset.add(int(item))
             sequence.append(iset)
-        parseddb.append(sequence)
-        for item in sequencebag:
+        parsed_db.append(sequence)
+        for item in sequence_bag:
             if item in itembag:
                 itembag[item] += 1
             else:
                 itembag[item] = 1
-    return parseddb, zone2int, itembag
+    return parsed_db, zone2int, itembag
 
 
 def __parse_options__(options):
@@ -78,31 +95,42 @@ def __parse_options__(options):
     Parses options and checks the minimum set of options is present.
     Selects the correct classes for each version of the algorithm.
 
-    Extended description of function.
-
     Parameters
     ----------
-    options : Dict
+    options : dict
         options used to configure
 
     Returns
     -------
-    Dict
-        Database Parsed in format, zone2int, itembag
+    options: dict
+        options parsed
 
     """
 
     assert 'threshold' in options
-    assert isinstance( options['threshold'], ( int, long ) )
+    assert isinstance(options['threshold'], (int, long))
 
     options['Pattern'] = Pattern
+
+    # ratio threshold
+    if type(options['threshold']) == float:
+        options['thresholdRatio'] = options['threshold']
+        options['threshold'] = int(math.ceil(options['threshold'] * options['databaseLen']))
+    elif type(options['threshold']) == int:
+        options['thresholdRatio'] = round(float(options['threshold']) / float(options['databaseLen']), 2)
+
+    if 'itemsSeparated' not in options:
+        options['itemsSeparated'] = True
+
+    if 'resultFile' not in options:
+        options['resultFile'] = True
 
     # Standard prefixspan
     options['DBPointer'] = DBPointer
     options['algorithm'] = "PrefixSpan"
     
     # COPPER
-    if any( param in options for param in ['minSseq','maxSseq','minSize','maxSize']):
+    if any(param in options for param in ['minSseq', 'maxSseq', 'minSize', 'maxSize']):
         options['DBPointer'] = CopperPointer
         options['algorithm'] = "Copper"
         if 'logic' not in options:
@@ -122,8 +150,8 @@ def __parse_options__(options):
             # options['maxSize'] maximum size of a pattern
         if 'maxSize' not in options:
             options['maxSize'] = Infinity()
-    # Window
-    if any( param in options for param in ['window', 'gap']):
+    # Window - Gap
+    if any(param in options for param in ['window', 'gap']):
         options['DBPointer'] = WindowGapPointer
         options['algorithm'] = "WinGap"
         if 'gap' in options:
@@ -141,8 +169,7 @@ def __parse_options__(options):
             options['winVal'] = 'default'
             options['window'] = lambda x, y: [[0, y]]
     # WinCopper
-    # if 'logic' in options and 'gap' in options:
-    if all( param in options for param in ['minSseq', 'minSize', 'window', 'gap']):
+    if all(param in options for param in ['minSseq', 'minSize', 'window', 'gap']):
         options['DBPointer'] = WinCopPointer
         options['algorithm'] = "WinCopper"
     return options
@@ -151,8 +178,6 @@ def __parse_options__(options):
 def __ffi__(support, itembag):
     """
     Returns frequent items from the itembag given support and itembag
-
-    Extended description of function.
 
     Parameters
     ----------
@@ -170,16 +195,14 @@ def __ffi__(support, itembag):
     return [i for i in itembag if itembag[i] >= support]
 
 
-def __itembag_merge__(itembaglist):
+def __itembag_merge__(itembag_list):
     """
     Merges Multiple itembags while keeping count
     in how many a given item appears
 
-    Extended description of function.
-
     Parameters
     ----------
-    itembaglist : List
+    itembag_list : List
         list of itembags to merge
 
     Returns
@@ -189,7 +212,7 @@ def __itembag_merge__(itembaglist):
 
     """
     mergedbag = {}
-    for bag in itembaglist:
+    for bag in itembag_list:
         for item in bag:
             if item in mergedbag:
                 mergedbag[item] += 1
@@ -201,8 +224,6 @@ def __itembag_merge__(itembaglist):
 def __prefixspan__(u_pointerdb, u_pattern, options, freqpatterns):
     """
     Prefixspan proper recursive call
-
-    Extended description of function.
 
     Parameters
     ----------
@@ -227,39 +248,35 @@ def __prefixspan__(u_pointerdb, u_pattern, options, freqpatterns):
         if entry:
             pointerdb.append(entry)
     freqpatterns.append([u_pattern, len(pointerdb), float(len(pointerdb))/float(options['databaseLen'])])
-
+    
     # Assemble - Get assemble candidates
-    candidates = __itembag_merge__(map(lambda e: e.assemblecandidates(options), pointerdb))
+    candidates = __itembag_merge__(map(lambda e: e.assemble_candidates(options), pointerdb))
     assemblings = filter(lambda i: candidates[i] >= options['threshold'], candidates)
     for assembling in assemblings:
         pattern = u_pattern.copy().assemble(assembling)
         __prefixspan__(pointerdb, pattern, options, freqpatterns)
 
     # Append - Get append candidates
-    candidates = __itembag_merge__(map(lambda e: e.appendcandidates(options), pointerdb))
+    candidates = __itembag_merge__(map(lambda e: e.append_candidates(options), pointerdb))
     appendings = filter(lambda i: candidates[i] >= options['threshold'], candidates)
     for appending in appendings:
         pattern = u_pattern.copy().append(appending)
         __prefixspan__(pointerdb, pattern, options, freqpatterns)
 
-    #Return
     return
 
 
-def prefixspan(sequences, u_options):
-#def prefixspan(u_db, u_options):
+def prefixspan(sequences, raw_options):
     """
     Prefixspan entry call, takes a database in the null separator
     format and a dictionary of options and returns frequent patterns
     and their frequency.
 
-    Extended description of function.
-
     Parameters
     ----------
-    u_db: List
+    sequences: List
         database
-    u_options : List
+    raw_options : List
         options used to configure
 
     Returns
@@ -269,56 +286,49 @@ def prefixspan(sequences, u_options):
 
     """
 
-    u_options['minSeqLen'] = dp.getMinSeqLen(sequences)
-    u_options['maxSeqLen'] = dp.getMaxSeqLen(sequences)
-    u_options['avgSeqLen'] = dp.getAvgSeqLen(sequences)
+    raw_options['minSeqLen'] = dp.min_seq_len(sequences)
+    raw_options['maxSeqLen'] = dp.max_seq_len(sequences)
+    raw_options['avgSeqLen'] = dp.avg_seq_len(sequences)
+    raw_options['minISLen'] = dp.min_itemsets_len(sequences)
+    raw_options['maxISLen'] = dp.max_itemsets_len(sequences)
+    raw_options['avgISLen'] = dp.avg_itemsets_len(sequences)
+    raw_options['quantDiffitems'] = len(dp.get_unique_items(sequences, raw_options['itemsSeparated']))
+    raw_options['databaseLen'] = len(sequences)
 
-    u_options['minISLen'] = dp.getMinitemsetsLen(sequences)
-    u_options['maxISLen'] = dp.getMaxitemsetsLen(sequences)
-    u_options['avgISLen'] = dp.getAvgitemsetsLen(sequences)
+    assert validate_db(sequences, raw_options), \
+        "Probably sequences have n-itemsets separated by commas, please options['itemsSeparated'] in False"
 
-    u_options['quantDiffitems'] = len(dp.get_unique_items(sequences, u_options['itemsSeparated']))
+    options = __parse_options__(raw_options)
 
-    u_options['databaseLen'] = len(sequences)
-    
-    # ratio threshold -- separate
-    if type(u_options['threshold']) == float:
-        u_options['thresholdRatio'] = u_options['threshold']
-        u_options['threshold'] = int(math.ceil(u_options['threshold'] * u_options['databaseLen']))
-    elif type(u_options['threshold']) == int:
-        u_options['thresholdRatio'] = round(float(u_options['threshold']) / float(u_options['databaseLen']), 2)
-
-    seq = dp.discretize_sequences(sequences, u_options['itemsSeparated'])
+    seq = dp.encode_sequences(sequences, options['itemsSeparated'])
     u_db = fp.db_to_spmf(seq)
-    s_db = fp.readDB(u_db, u_options)
-
-    options = __parse_options__(u_options)
-    #p_db, z2i, ibag = __parse_db__(u_db)
+    s_db = fp.read_db_format(u_db, options)
     p_db, z2i, ibag = __parse_db__(s_db)
 
-    mem_before = pro.get_process_memory()
-    mem_max_before = pro.get_max_resident_memory()
+    mem_before = pro.process_memory()
+    mem_max_before = pro.max_resident_memory()
     time_start = time.time()
 
     candidates = __ffi__(options['threshold'], ibag)
     db = map(lambda seq: map(lambda iset: filter(lambda x: x in candidates, iset), seq), p_db)
-    pointerdb = [options['DBPointer'](z_id, db) for z_id in range(len(db))]
+    pointer_db = [options['DBPointer'](z_id, db) for z_id in range(len(db))]
     candidates = list(map(lambda x: options['Pattern']().assemble(x), candidates))
-    freqpatterns = []
-    for atomicseq in candidates:
-            __prefixspan__(pointerdb, atomicseq, options, freqpatterns)
+    freq_patterns = []
+    for atomic_seq in candidates:
+        __prefixspan__(pointer_db, atomic_seq, options, freq_patterns)
     if 'logic' in options:
-        freqpatterns = list(filter(lambda x: options['logic'](x[0])
-                            and options['minSize'] <= len(x[0])
-                            and options['minSseq'] <= x[0].size(), freqpatterns))
+        freq_patterns = list(filter(lambda x: options['logic'](x[0])
+                                    and options['minSize'] <= len(x[0])
+                                    and options['minSseq'] <= x[0].size(), freq_patterns))
     
     time_end = time.time()
-    mem_max_after = pro.get_max_resident_memory()
-    mem_after = pro.get_process_memory()
+    mem_max_after = pro.max_resident_memory()
+    mem_after = pro.process_memory()
 
-    freqpatterns_c = dp.undiscretize_sequences(sequences, freqpatterns, options['itemsSeparated'])
-    #return freqpatterns
-    fp.get_result_file(freqpatterns_c, options, time_start, time_end, mem_after, mem_before, mem_max_after, mem_max_before)
+    freq_patterns_c = dp.decode_sequences(sequences, freq_patterns, options['itemsSeparated'])
     
-    return freqpatterns_c
-
+    if options['resultFile']:
+        fp.result_file(freq_patterns_c, options, time_start, time_end, 
+                       mem_after, mem_before, mem_max_after, mem_max_before)
+    
+    return freq_patterns_c

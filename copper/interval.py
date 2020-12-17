@@ -1,45 +1,50 @@
 # -*- coding: utf-8 -*-
 
 """
-interval.py: Pointer to interval and interval operations friend functions .
-
-__author__ = "Agustin Guevara Cogorno"
-__copyright__ = "Copyright 2015, Copper Package"
-__license__ = "GPL"
-__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
-__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
-__email__ = "ye.maeharaa@up.edu.pe"
-__institution_ = "Universidad del Pacifico|University of the Pacific"
-__version__ = "1.1"
-__status__ = "Proof of Concept (POC)"
+Pointer to interval and interval operations friend functions.
 """
 
 
-class __IntervalPointer__(object):
+class IntervalPointer(object):
     """ Interval Pointer Class"""
     def __init__(self, ref):
+        """
+        Constructor of Interval Pointer class
+        """
         self.ref = ref
         self.pos = 0
         self.lim = len(ref)
 
     def __getitem__(self, arg):
+        """
+        Obtain item in interval
+        """
         return self.ref[self.pos][arg]
 
     def peek(self, arg):
+        """
+        Peek in interval
+        """
         return self.ref[self.pos+1][arg]
 
     def next(self):
+        """
+        Next item in interval
+        """
         self.pos += 1
         return
 
     def check(self):
+        """
+        Check if interval is not empty or is not reached limit
+        """
         return bool(self) and self.pos + 1 < self.lim
 
     def __nonzero__(self):
         return self.pos < self.lim
 
 
-def __intervalu__(intervallist):
+def __intervalu__(interval_list):
     """
     Clopen interval union using linesweep.
 
@@ -47,7 +52,7 @@ def __intervalu__(intervallist):
 
     Parameters
     ----------
-    intervallist : list
+    interval_list : list
         interval list to operate
 
     Returns
@@ -57,7 +62,7 @@ def __intervalu__(intervallist):
 
     """
     result = []
-    for interval in intervallist:
+    for interval in interval_list:
         if not result:
             result.append([x for x in interval])
         else:
@@ -65,10 +70,11 @@ def __intervalu__(intervallist):
                 result[-1][1] = max(result[-1][1], interval[1])
             else:
                 result.append([x for x in interval])
+
     return result
 
 
-def __intervaln__(intervallist1, intervallist2):
+def __intervaln__(interval_list1, interval_list2):
     """
     Interval intersection between two list of disjoint clopen intervals
     using linesweep.
@@ -77,7 +83,10 @@ def __intervaln__(intervallist1, intervallist2):
 
     Parameters
     ----------
-    intervallist : list
+    interval_list1 : list
+        interval list to operate
+
+    interval_list1 : list
         interval list to operate
 
     Returns
@@ -87,18 +96,23 @@ def __intervaln__(intervallist1, intervallist2):
 
     """
     result = []
-    if not(intervallist1 and intervallist2):
+    if not(interval_list1 and interval_list2):
         return result
-    if (intervallist1[0][0] < intervallist2[0][0]) and (intervallist1[0][1] > intervallist2[-1][1]):
-        return intervallist2
-    if (intervallist2[0][0] < intervallist1[0][0]) and (intervallist2[0][1] > intervallist1[-1][1]):
-        return intervallist1
-    j = 0 if intervallist1[0][0] < intervallist2[0][0] else 1
+
+    if (interval_list1[0][0] < interval_list2[0][0]) and (interval_list1[0][1] > interval_list2[-1][1]):
+        return interval_list2
+
+    if (interval_list2[0][0] < interval_list1[0][0]) and (interval_list2[0][1] > interval_list1[-1][1]):
+        return interval_list1
+
+    j = 0 if interval_list1[0][0] < interval_list2[0][0] else 1
     q = (j + 1) % 2
-    i = (__IntervalPointer__(intervallist1), __IntervalPointer__(intervallist2))
+    i = (IntervalPointer(interval_list1), IntervalPointer(interval_list2))
+
     while i[0] and i[1]:
         while i[j].check() and i[j].peek(0) < i[q][0]:
             i[j].next()
+
         if i[q][0] >= i[j][1]:
             i[j].next()
             j, q = q, j
@@ -107,7 +121,8 @@ def __intervaln__(intervallist1, intervallist2):
             if i[j][1] < i[q][1]:
                 j, q = q, j
             i[q].next()
+
     if result:
-        assert result[0][0] >= intervallist1[0][0]
-        assert result[0][0] >= intervallist2[0][0]
+        assert result[0][0] >= interval_list1[0][0]
+        assert result[0][0] >= interval_list2[0][0]
     return result

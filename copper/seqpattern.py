@@ -1,17 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-seqpattern.py: Sequential pattern class for use with the prefixspan algorithm.
-
-__author__ = "Agustin Guevara Cogorno"
-__copyright__ = "Copyright 2015, Copper Package"
-__license__ = "GPL"
-__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
-__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
-__email__ = "ye.maeharaa@up.edu.pe"
-__institution_ = "Universidad del Pacifico"
-__version__ = "1.1"
-__status__ = "Proof of Concept (POC)"
+Sequential pattern class for use with the prefixspan algorithm.
 """
 
 import copy as copymodule
@@ -25,8 +15,6 @@ class Pattern(object):
     def __init__(self):
         """
         Constructor of Pattern class
-
-        Extended description of function.
 
         Parameters
         ----------
@@ -45,15 +33,14 @@ class Pattern(object):
         """
         Copy entire pattern
 
-        Extended description of function.
-
         Parameters
         ----------
 
 
         Returns
         -------
-
+        Pattern
+           Pattern copied
         """
         clone = Pattern()
         clone.__tail__ = copymodule.deepcopy(self.__tail__)
@@ -64,8 +51,6 @@ class Pattern(object):
     def assemble(self, item):
         """
         assemble the pattern
-
-        Extended description of function.
 
         Parameters
         ----------
@@ -80,13 +65,12 @@ class Pattern(object):
         new = self.copy()
         new.__head__.add(item)
         new.__last__ = item
+
         return new
 
     def appended(self):
         """
         Evaluate if item is appended in pattern
-
-        Extended description of function.
 
         Parameters
         ----------
@@ -94,6 +78,7 @@ class Pattern(object):
 
         Returns
         -------
+        Boolean
 
         """
         return len(self.__head__) == 1
@@ -101,8 +86,6 @@ class Pattern(object):
     def append(self, item):
         """
         Append item in pattern
-
-        Extended description of function.
 
         Parameters
         ----------
@@ -117,15 +100,13 @@ class Pattern(object):
         new = self.copy()
         if new.__head__:
             new.__tail__.append(new.__head__)
-        new.__head__ = set([item])  # Used to be Oset
+        new.__head__ = {item}  # Used to be Oset
         new.__last__ = item
         return new
 
     def last(self):
         """
         Get last item
-
-        Extended description of function.
 
         Parameters
         ----------
@@ -175,9 +156,9 @@ class Pattern(object):
             string += '<'
             buffr = ''
             for item in iset:
-                buffr += str(item)+', '
+                buffr += str(item) + ', '
             if buffr:
-                string += buffr[:-2]+'>'
+                string += buffr[:-2] + '>'
             else:
                 string += '>'
         return string

@@ -1,73 +1,59 @@
 # -*- coding: utf-8 -*-
 
-from seqpattern import Pattern
-
 """
-logicaleval.py: Module for the Logical evaluation functionality of COPPER
+Module for the Logical evaluation functionality of COPPER
 using ShuntingYard to Postfix notation and an evaluation tree to finally
 obtain a function that takes a pattern and returns if it fulfills the logical
 condition given on the generating options.
-
-__author__ = "Agustin Guevara Cogorno"
-__copyright__ = "Copyright 2015, Copper Package"
-__license__ = "GPL"
-__maintainer__ = "Yoshitomi Edu,ardo Maehara Aliaga"
-__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
-__email__ = "ye.maeharaa@up.edu.pe"
-__institution_ = "Universidad del Pacifico"
-__version__ = "1.1"
-__status__ = "Proof of Concept (POC)"
 """
 
+from seqpattern import Pattern
 
-def evaluator(logicalExpresion):
+
+def evaluator(logical_expression):
     """
     Evaluate logical expression.
 
-    Extended description of function.
-
     Parameters
     ----------
-    logicalExpresion : string
+    logical_expression : string
         Logical expression to evaluate
 
     Returns
     -------
-    Boolean
+    bool
         Logical Expression Value
 
     """
-    tokenizedExpression = filter(lambda x: x, logicalExpresion.replace(' ', '')
-                                                              .replace('&', "\0&\0")
-                                                              .replace(')', "\0)\0")
-                                                              .replace('(', "\0(\0")
-                                                              .replace('|', "\0|\0")
-                                                              .split("\0"))
-    evalTree = posttotree(shuntingyard(tokenizedExpression))
+    tokenized_expression = filter(lambda x: x, logical_expression.replace(' ', '')
+                                  .replace('&', "\0&\0")
+                                  .replace(')', "\0)\0")
+                                  .replace('(', "\0(\0")
+                                  .replace('|', "\0|\0")
+                                  .split("\0"))
+    eval_tree = postfixtotree(shuntingyard(tokenized_expression))
 
-    return lambda x: evalTree.evaluate(x)
+    return lambda x: eval_tree.evaluate(x)
 
 
-def shuntingyard(tokenChain):
+def shuntingyard(token_chain):
     """
-    Convert Infix Notation to Postfix Notation.
-
-    Extended description of function.
+    Convert Infix Notation to Postfix Notation using Shunting Yard Algorithm.
 
     Parameters
     ----------
-    tokenChain : string
+    token_chain : string
         token string to analyze
 
     Returns
     -------
-    Char Queue
+    list
         Queue Char in Postfix Order
 
     """
     stack = []
     queue = []
-    for token in tokenChain:
+    for token in token_chain:
         if token == "&" or token == "|":
             while stack and (stack[-1] == "&" or stack[-1] == "|"):
                 queue.append(stack.pop())
@@ -78,10 +64,7 @@ def shuntingyard(tokenChain):
             popped = stack.pop()
             while popped != '(':
                 queue.append(popped)
-                # try:
                 popped = stack.pop()
-                # except:
-                #    raise("Mismatched Parenthesis)
         else:
             queue.append(token)
 
@@ -91,15 +74,13 @@ def shuntingyard(tokenChain):
     return queue
 
 
-def posttotree(postfixChain):
+def postfixtotree(postfix_chain):
     """
     Populate Evaluation Tree with List in Postfix Notation
 
-    Extended description of function.
-
     Parameters
     ----------
-    postfixChain : string
+    postfix_chain : string
         postfix String used to populate a tree
 
     Returns
@@ -109,7 +90,7 @@ def posttotree(postfixChain):
 
     """
     stack = []
-    for token in postfixChain:
+    for token in postfix_chain:
         if token == "&" or token == "|":
             e1 = stack.pop()
             e2 = stack.pop()
@@ -122,21 +103,28 @@ def posttotree(postfixChain):
 
 
 def dictionaryeval(dictionary, token):
+    """
+    Evaluate if a token is in a dictionary
+
+    Parameters
+    ----------
+    dictionary: dict
+
+    token: string
+
+    Returns
+    -------
+    bool
+    """
     return token in dictionary
-    '''
-    if ':' in token:
-        var, val = token.split(':')
-        return var in dictionary and val in dictionary[var]
-    else:
-        return token in dictionary
-    '''
 
 
 class Tree:
     """
     Abstract Syntax Tree
     """
-    def __init__(self, root, lLeaf=None, rLeaf=None):
+
+    def __init__(self, root, left_leaf=None, read_leaf=None):
         """
         Constructor of class Tree
 
@@ -146,9 +134,9 @@ class Tree:
         ----------
         root: Tree
             root node of tree
-        lLeaf: Tree
+        left_leaf: Tree
             left node of tree
-        rLeaf: Tree
+        read_leaf: Tree
             right node of tree
 
         Returns
@@ -156,14 +144,12 @@ class Tree:
         None
         """
         self.root = root
-        self.left = lLeaf
-        self.right = rLeaf
+        self.left = left_leaf
+        self.right = read_leaf
 
     def evaluate(self, dictionary):
         """
         Evaluate tree in semantic way.
-
-        Extended description of function.
 
         Parameters
         ----------
@@ -183,39 +169,33 @@ class Tree:
                 dictionary = str(dictionary).replace('><', ',').replace('<', '').replace('>', '').split(',')
 
         if self.left:
-            l = self.left.evaluate(dictionary)
+            left = self.left.evaluate(dictionary)
         else:
             return dictionaryeval(dictionary, self.root)
 
         if self.right:
-            r = self.right.evaluate(dictionary)
+            right = self.right.evaluate(dictionary)
 
-        if l:
+        if left:
             if self.root == '¬':
-                return not l
+                return not left
 
-        if r:
+        if right:
             if self.root == '¬':
-                return not r
+                return not right
 
-        if l and r:
-            # if token == '&':
+        if left and right:
             if self.root == '&':
-                return l and r
-            # if token == '|':
+                return left and right
             if self.root == '|':
-                return l or r
+                return left or right
 
     def __nonzero__(self):
         """
-        Evaluate if tree is empty
-
-        Extended description of function.
+        Evaluate if tree is empty.
 
         Parameters
         ----------
-        tokenChain : string
-            token string to analyze
 
         Returns
         -------
@@ -228,8 +208,6 @@ class Tree:
     def show(self):
         """
         Show tree in a string
-
-        Extended description of function.
 
         Parameters
         ----------

@@ -1,30 +1,36 @@
 # -*- coding: utf-8 -*-
 
 """
-fileprocessor.py: Read Databases in Kosara's Format and spmf Format.
-
-__author__ = "Agustin Guevara Cogorno"
-__copyright__ = "Copyright 2015, Copper Package"
-__license__ = "GPL"
-__maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
-__credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
-__email__ = "ye.maeharaa@up.edu.pe"
-__institution_ = "Universidad del Pacifico"
-__version__ = "1.1"
-__status__ = "Proof of Concept (POC)"
-
+Read and process databases in Kosarak's Format and SPMF Format.
 """
 
 from dbpointer import DBPointer, CopperPointer, WindowGapPointer, WinCopPointer
 from infinity import Infinity
-import dataprocessor as dp
 
 
-def readDB(u_db, options):
+def unsafe_join(x, base=''):
+    """
+    Join Unsafe Strings
+
+    Parameters
+    ----------
+    x : string
+    base : string
+
+    Returns
+    -------
+    string
+       String join with the base
+    """
+    string = base
+    for i in x:
+        string += i
+    return string
+
+
+def read_db_format(u_db, options):
     """
     Read a database in a format
-
-    Extended description of function.
 
     Parameters
     ----------
@@ -44,61 +50,37 @@ def readDB(u_db, options):
         options['format'] = 'spmf'
 
     if options['format'] == 'ascii':
-        return asciiFormater(u_db)
+        return ascii_formater(u_db)
     elif options['format'] == 'spmf':
-        return minOneFormater(u_db)
+        return spmf_formater(u_db)
     else:
         print("This File Format do not exists")
         return
 
 
-def unsafeJoin(x, base=''):
+def ascii_formater(ascii_file):
     """
-    Join Unsafe Strings
-
-    Extended description of function.
+    Read a database in format of Kosarak's Format
 
     Parameters
     ----------
-    x : string
-    base : string
+    ascii_file : string
+        Database in string in Kosarak's format
 
     Returns
     -------
-    string
-       String join with the base
+    list
+        Database converted in spmf format
     """
-    string = base
-    for i in x:
-        string += i
-    return string
-
-
-def asciiFormater(asciiFile):
-    """
-    Read a database in format of Kosara Format
-
-    Extended description of function.
-
-    Parameters
-    ----------
-    asciiFile : string
-        Database in string in Kosara format
-
-    Returns
-    -------
-    List(String)
-        Database readed in a list
-    """
-    pDB = []
-    for index, line in enumerate(asciiFile):
+    p_db = []
+    for index, line in enumerate(ascii_file):
         pattern = []
         itemset = ''
-        splitLine = line.replace(' \n', '').split(' ')
+        split_line = line.replace(' \n', '').split(' ')
         ignore = True
         first = True
         counter = 0
-        for slot in splitLine:
+        for slot in split_line:
             if not ignore:
                 if not counter:
                     counter = int(slot)
@@ -112,35 +94,33 @@ def asciiFormater(asciiFile):
                     itemset += slot + '|'
             else:
                 ignore = False
-        pDB.append((str(index) + unsafeJoin(pattern, '\0'))[:-1])
-    return pDB
+        p_db.append((str(index) + unsafe_join(pattern, '\0'))[:-1])
+    return p_db
 
 
-def asciiToMinOne(asciiFile):
+def ascii_to_spmf(ascii_file):
     """
-    Read a database in format of spmf
-
-    Extended description of function.
+    Read a database in format of Kosarak's convert to SPMF format
 
     Parameters
     ----------
-    asciiFile : string
-        Database in string in spmf format
+    ascii_file : string
+        Database in string in Kosarak format
 
     Returns
     -------
-    List(String)
-        Database readed in a list
+    list
+        Database converted in spmf
     """
-    pDB = []
-    for index, line in enumerate(asciiFile):
+    p_db = []
+    for index, line in enumerate(ascii_file):
         pattern = []
         itemset = ''
-        splitLine = line.replace(' \n', '').split(' ')
+        split_line = line.replace(' \n', '').split(' ')
         ignore = True
         first = True
         counter = 0
-        for slot in splitLine:
+        for slot in split_line:
             if not ignore:
                 if not counter:
                     counter = int(slot)
@@ -154,39 +134,35 @@ def asciiToMinOne(asciiFile):
                     itemset += slot + ' '
             else:
                 ignore = False
-        pDB.append(((str(1) + unsafeJoin(pattern, ''))[:-1] + '-2')[1:])
-    return pDB
+        p_db.append(((str(1) + unsafe_join(pattern, ''))[:-1] + '-2')[1:])
+    return p_db
 
 
-def minOneFormater(moDB):
+def spmf_formater(mo_db):
     """
-    Convert database in spmf format to Kosara's format
-
-    Extended description of function.
+    Convert database in spmf format to Kosarak's format
 
     Parameters
     ----------
-    moDB : string
+    mo_db : string
         Database in string in format of spmf
 
     Returns
     -------
     String
-        Database in string in format of Kosara
+        Database in string in format of Kosarak
     """
     patterndb = []
-    for line, entry in enumerate(moDB):
+    for line, entry in enumerate(mo_db):
         splitted = entry.rstrip().replace("-1", "\0").replace("-2", "").split('\0')[:-1]
-        patterndb.append(str(line)+unsafeJoin(map(lambda x: x.lstrip().rstrip().replace(' ', '|')+"\0", splitted), '\0')[:-1])
+        patterndb.append(str(line) + unsafe_join(map(lambda x: x.lstrip().rstrip().replace(' ', '|') + "\0", splitted),
+                                                 '\0')[:-1])
     return patterndb
-
 
 
 def db_to_spmf(db):
     """
     Convert database in csv format to spmf format
-
-    Extended description of function.
 
     Parameters
     ----------
@@ -215,11 +191,9 @@ def db_to_spmf(db):
     return spmf_db
 
 
-def get_result_file_name(base, options):
+def result_file_name(base, options):
     """
     obtain name of results file
-
-    Extended description of function.
 
     Parameters
     ----------
@@ -229,29 +203,33 @@ def get_result_file_name(base, options):
     Returns
     -------
     String
-        Database in string in format of Kosara
+        name of result file name
     """
     outfile = base + "_"
     for opt in options:
         if opt == 'DBPointer':
             if options[opt] == DBPointer:
-                #outfile += 'PrefixSpan'
+                # PrefixSpan
                 outfile += 'ps' + '_'
             elif options[opt] == CopperPointer:
-                #outfile += 'Copper'
+                # Copper
                 outfile += 'copper' + '_'
             elif options[opt] == WinCopPointer:
-                #outfile += 'Windowed-Cooper'
+                # Windowed-Cooper
                 outfile += 'wincopper' + '_'
             elif options[opt] == WindowGapPointer:
-                #outfile += 'Window-Gap'
+                # Windowed Gapped Copper
                 outfile += 'wingap' + '_'
         elif opt == 'algorithm':
             continue
         elif opt == 'Pattern':
             continue
-        elif opt == 'thresholdRatio':
+        elif opt == 'itemsSeparated':
             continue
+        elif opt == 'threshold':
+            outfile += 'at' + '_' + str(options[opt]) + '_'			
+        elif opt == 'thresholdRatio':
+            outfile += 'rt' + '_' + str(int(options[opt] * 100)) + '_'
         elif opt == 'winVal':
             continue
         elif opt == 'databaseLen':
@@ -272,7 +250,11 @@ def get_result_file_name(base, options):
             continue
         elif opt == 'itemsSeparated':
             continue
+        elif opt == 'resultFile':
+            continue
         elif opt == 'quantDiffitems':
+            continue
+        elif opt == 'test':
             continue
         elif opt == 'minSize':
             outfile += 'miis_' + str(options[opt]) + '_'
@@ -290,11 +272,13 @@ def get_result_file_name(base, options):
                 outfile += 'mass_' + str(options[opt]) + '_'
         elif opt == 'logic':
             if options[opt] == (lambda x: True):
-                outfile += 'l_true_'
+                outfile += 'l_default_'
         elif opt == 'window':
             outfile += 'win_' + str(options['winVal']) + '_'
         elif opt == 'gap':
             outfile += 'gap_' + str(options['gapVal']) + '_'
+        elif opt == 'dataDesc':
+            outfile += str(options[opt]) + '_'
         else:
             outfile += str(opt[0]) + "_" + str(options[opt]) + '_'
 
@@ -302,11 +286,10 @@ def get_result_file_name(base, options):
     return outfile
 
 
-def get_result_file(result_mining, options, time_start=-1, time_end=-1, mem_after=-1, mem_before=-1, mem_max_after=-1, mem_max_before=-1, base='Results'):
+def result_file(result_mining, options, time_start=-1, time_end=-1, mem_after=-1, mem_before=-1,
+                mem_max_after=-1, mem_max_before=-1, base='Results'):
     """
     Obtain summary results file of mining
-
-    Extended description of function.
 
     Parameters
     ----------
@@ -333,14 +316,12 @@ def get_result_file(result_mining, options, time_start=-1, time_end=-1, mem_afte
     File
         
     """
-    outfile = get_result_file_name(base, options)
+    outfile = result_file_name(base, options)
     with open(outfile, "w") as out:
-        #out.write("Options: " + str(options) + '\n')
-        
         out.write("{")
         out.write("\'algorithm\': " + "\'" + str(options['algorithm']) + "\'" + ", ")
-        out.write("\'format\': " + "\'" + str(options['format']) + "\'" +  ", ")
-        #out.write("================== Dataset Description ==================\n")
+        out.write("\'format\': " + "\'" + str(options['format']) + "\'" + ", ")
+        # ================== Dataset Description ==================
         out.write("\'DBsize\': " + str(options['databaseLen']) + ", ")
         out.write("\'DBmaxSeqLen\': " + str(options['maxSeqLen']) + ", ")
         out.write("\'DBminSeqLen\': " + str(options['minSeqLen']) + ", ")
@@ -350,7 +331,7 @@ def get_result_file(result_mining, options, time_start=-1, time_end=-1, mem_afte
         out.write("\'DBavgISLen\': " + str(options['avgISLen']) + ", ")
         out.write("\'quantDiffitems\': " + str(options['quantDiffitems']) + ", ")
 
-        #out.write("================== Analysis Description ==================\n")
+        # ================== Analysis Description ==================
         out.write("\'absMinSupp\': " + str(options['threshold']) + ", ")
         out.write("\'relMinSupp\': " + str(options['thresholdRatio']) + ", ")
         out.write("\'pattFound\': " + str(len(result_mining)))
@@ -362,11 +343,8 @@ def get_result_file(result_mining, options, time_start=-1, time_end=-1, mem_afte
         
         if mem_max_after != -1 and mem_max_before != -1:
             out.write(", " + "\'maxMemory\': " + str(mem_max_after - mem_max_before))
-
-        #if ('maxSseq' in options or 'minSseq' in options or 'maxSize' in options or 
-        #   'minSize' in options or 'window' in options or 'gap' in options):
         
-        #out.write("================== Constraints Description ==================\n")
+        # ================== Constraints Description ==================
 
         if 'maxSseq' in options and 'minSseq' in options:
             out.write(", " + "\'minSeqcons\': " + str(options['minSseq']))

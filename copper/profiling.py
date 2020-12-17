@@ -1,23 +1,65 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+"""
+Profiling module
+"""
+
 import os
 import psutil
 
 
-def get_process_memory():
+def process_memory():
+    """
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+    float
+        get current memory of process
+
+    """
     process = psutil.Process(os.getpid())
     return process.memory_info().rss
 
-def get_max_resident_memory():
-    if psutil.LINUX:
-		import resource
-		return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+
+def max_resident_memory():
+    """
+
+    Parameters
+    ----------
+
+    Returns
+    -------
+    float
+        get max memory of process
+
+    """
+    if psutil.LINUX or psutil.MACOS or \
+       psutil.FREEBSD or psutil.NETBSD or \
+       psutil.OPENBSD or psutil.BSD:
+        import resource
+        return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     elif psutil.WINDOWS:
         process = psutil.Process(os.getpid())
         return process.memory_info().peak_wset
 
+
 def format_bytes(bytes):
+    """
+    [DEPRECATED]  format bytes in respective unit
+
+    Parameters
+    ----------
+    bytes: float
+
+    Returns
+    -------
+    string
+        bytes depending quantity of bytes
+    """
     if abs(bytes) < 1000:
         return str(bytes)+"B"
     elif abs(bytes) < 1e6:
@@ -29,7 +71,21 @@ def format_bytes(bytes):
 
 
 def elapsed_since(start, end):
-    #return time.strftime("%H:%M:%S", time.gmtime(time.time() - start))
+    """
+    [DEPRECATED]  Elapsed time depending seconds
+
+    Parameters
+    ----------
+    start: date
+        start time
+    end: date
+        end time
+
+    Returns
+    -------
+    string
+        elapsed time in depending quantity of seconds elapsed
+    """
     elapsed = end - start
     if elapsed < 1:
         return str(round(elapsed*1000,2)) + "ms"
@@ -42,4 +98,15 @@ def elapsed_since(start, end):
 
 
 def number_patterns(results):
+    """
+
+    Parameters
+    ----------
+    results: list
+
+    Returns
+    -------
+    string
+        number of patterns
+    """
     return str(len(results)) + "Patterns" 
