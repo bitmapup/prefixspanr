@@ -2,5 +2,7 @@
 *.conf
 *.ipynb_checkpoints
 *.log
-*.idea
+.idea/
+.vscode/
+.ipynb_checkpoints/
 __pycache__/
