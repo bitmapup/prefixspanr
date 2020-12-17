@@ -1,0 +1,1335 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Package structure &#8212; copper beta documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="bibliography.html" />
+    <link rel="prev" title="Package Options" href="options.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="package-structure">
+<h1>Package structure<a class="headerlink" href="#package-structure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-copper">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-copper" title="Permalink to this headline">¶</a></h2>
+<p>This package implements copper and extensions</p>
+</div>
+<div class="section" id="module-copper.dataprocessor">
+<span id="copper-dataprocessor-module"></span><h2>copper.dataprocessor module<a class="headerlink" href="#module-copper.dataprocessor" title="Permalink to this headline">¶</a></h2>
+<p>module for preprocess and postprocess data.</p>
+<dl class="function">
+<dt id="copper.dataprocessor.avg_itemsets_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">avg_itemsets_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.avg_itemsets_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain average length of all itemsets of all sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">average length of itemsets of all sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.avg_seq_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">avg_seq_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.avg_seq_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain average length of sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">average length of sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Numpy Array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.decode_sequences">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">decode_sequences</code><span class="sig-paren">(</span><em>raw_db</em>, <em>result_pattern_list</em>, <em>item_separated=False</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.decode_sequences" title="Permalink to this definition">¶</a></dt>
+<dd><p>cast patterns to string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>raw_db</strong> (<em>list</em>) – database of sequences without preprocessing</li>
+<li><strong>result_pattern_list</strong> (<em>list</em>) – results patterns of sequential pattern mining</li>
+<li><strong>item_separated</strong> (<em>bool</em>) – True: items in itemsets which are in sequence are separated by colon
+False or blank: itemsets which are in sequence are separated by colon</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">database decoded</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.encode_logic">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">encode_logic</code><span class="sig-paren">(</span><em>raw_db</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.encode_logic" title="Permalink to this definition">¶</a></dt>
+<dd><p>encode parse logic of soft inclussion constraint</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>raw_db</strong> (<em>list</em>) – database of sequences without preprocessing</li>
+<li><strong>options</strong> (<em>dict</em>) – options to config</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">logic encoded</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.encode_sequences">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">encode_sequences</code><span class="sig-paren">(</span><em>raw_db</em>, <em>item_separated=False</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.encode_sequences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode a sequence in numbers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>raw_db</strong> (<em>list</em>) – database of sequences without preprocessing</li>
+<li><strong>item_separated</strong> (<em>bool</em>) – True: items in itemsets which are in sequence are separated by colon
+False or blank: itemsets which are in sequence are separated by colon</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">database encoded</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.get_unique_items">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">get_unique_items</code><span class="sig-paren">(</span><em>database</em>, <em>item_separated=False</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.get_unique_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a unique itemsets or items of sequence</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>database</strong> (<em>list</em>) – database of sequences</li>
+<li><strong>item_separated</strong> (<em>bool</em>) – True: items in itemsets are separated by colon
+False or blank: itemsets are separated by colon</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">unique items list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.itemsets_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">itemsets_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.itemsets_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain length of all itemsets of all sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">average length of sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Numpy Array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.max_itemsets_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">max_itemsets_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.max_itemsets_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain maximum length of all itemsets of all sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">maximum length of itemsets of all sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.max_seq_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">max_seq_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.max_seq_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain maximum length of sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">maximum length of sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.min_itemsets_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">min_itemsets_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.min_itemsets_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain minimum length of all itemsets of all sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">minimum length of itemsets of all sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.min_seq_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">min_seq_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.min_seq_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain minimum length of sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">minimum length of sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Numpy Array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.pattern_to_list">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">pattern_to_list</code><span class="sig-paren">(</span><em>result_patterns</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.pattern_to_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert pattern format to list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>result_patterns</strong> (<em>list</em>) – results patterns of sequential pattern mining</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">results patterns mined in a list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.result_patterns_to_str">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">result_patterns_to_str</code><span class="sig-paren">(</span><em>result_patterns</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.result_patterns_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>cast patterns to string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>result_patterns</strong> (<em>list</em>) – results patterns of sequential pattern mining</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">pattern convert to string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.dataprocessor.seqs_len">
+<code class="descclassname">copper.dataprocessor.</code><code class="descname">seqs_len</code><span class="sig-paren">(</span><em>sequences</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dataprocessor.seqs_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain all length of sequences</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sequences</strong> (<em>list</em>) – database of sequences without preprocessing</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">length of sequences</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.dbpointer">
+<span id="copper-dbpointer-module"></span><h2>copper.dbpointer module<a class="headerlink" href="#module-copper.dbpointer" title="Permalink to this headline">¶</a></h2>
+<p>Pointer to Database class for use with Prefixspan.
+Different classes correspond to different functionality and capabilities.
+* DBPointer - Prefixspan
+* CopperPointer - COPPER
+* WindowGap - PrefixSpan with Time Constraints (Window/Gap)
+* WinCop - COPPER with Time Constraints with Time Constraints</p>
+<dl class="class">
+<dt id="copper.dbpointer.CopperPointer">
+<em class="property">class </em><code class="descclassname">copper.dbpointer.</code><code class="descname">CopperPointer</code><span class="sig-paren">(</span><em>zid</em>, <em>db</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.CopperPointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#copper.dbpointer.DBPointer" title="copper.dbpointer.DBPointer"><code class="xref py py-class docutils literal notranslate"><span class="pre">copper.dbpointer.DBPointer</span></code></a></p>
+<p>Copper Database Pointer Class</p>
+<dl class="method">
+<dt id="copper.dbpointer.CopperPointer.append_candidates">
+<code class="descname">append_candidates</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.CopperPointer.append_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add candidate to candidate set.</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – Options used to obtain candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Candidates</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List(string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.CopperPointer.assemble_candidates">
+<code class="descname">assemble_candidates</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.CopperPointer.assemble_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemble the candidates set</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – Options used to obtain candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Candidates</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List(string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.CopperPointer.project">
+<code class="descname">project</code><span class="sig-paren">(</span><em>pattern</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.CopperPointer.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project sequence pattern.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> – Pattern of sequence</li>
+<li><strong>options</strong> – Options used to obtain projections</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Pointer Copied</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Pointer</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="copper.dbpointer.DBPointer">
+<em class="property">class </em><code class="descclassname">copper.dbpointer.</code><code class="descname">DBPointer</code><span class="sig-paren">(</span><em>zid</em>, <em>db</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.DBPointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>PrefixSpan Database Pointer Class</p>
+<dl class="method">
+<dt id="copper.dbpointer.DBPointer.append_candidates">
+<code class="descname">append_candidates</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.DBPointer.append_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add candidate to candidate set.</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – Options used to obtain candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Candidates</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List(string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.DBPointer.assemble_candidates">
+<code class="descname">assemble_candidates</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.DBPointer.assemble_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemble the candidates set</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – Options used to obtain candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Candidates</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List(string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.DBPointer.partial_copy">
+<code class="descname">partial_copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.DBPointer.partial_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy pointer sharing values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Pointer Copied</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pointer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.DBPointer.project">
+<code class="descname">project</code><span class="sig-paren">(</span><em>pattern</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.DBPointer.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project sequence pattern.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> – Pattern of sequence</li>
+<li><strong>options</strong> – Options used to obtain projections</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Pointer Copied</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Pointer</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="copper.dbpointer.WinCopPointer">
+<em class="property">class </em><code class="descclassname">copper.dbpointer.</code><code class="descname">WinCopPointer</code><span class="sig-paren">(</span><em>zid</em>, <em>db</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WinCopPointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#copper.dbpointer.CopperPointer" title="copper.dbpointer.CopperPointer"><code class="xref py py-class docutils literal notranslate"><span class="pre">copper.dbpointer.CopperPointer</span></code></a>, <a class="reference internal" href="#copper.dbpointer.WindowGapPointer" title="copper.dbpointer.WindowGapPointer"><code class="xref py py-class docutils literal notranslate"><span class="pre">copper.dbpointer.WindowGapPointer</span></code></a></p>
+<p>WinCop Database Pointer Class</p>
+<dl class="method">
+<dt id="copper.dbpointer.WinCopPointer.append_candidates">
+<code class="descname">append_candidates</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WinCopPointer.append_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add candidate to candidate set.</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – Options used to obtain candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Candidates</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List(string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.WinCopPointer.assemble_candidates">
+<code class="descname">assemble_candidates</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WinCopPointer.assemble_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemble the candidates set</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – Options used to obtain candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Candidates</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List(string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.WinCopPointer.partial_copy">
+<code class="descname">partial_copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WinCopPointer.partial_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy pointer sharing values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Pointer Copied</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pointer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.WinCopPointer.project">
+<code class="descname">project</code><span class="sig-paren">(</span><em>pattern</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WinCopPointer.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project sequence pattern.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> – Pattern of sequence</li>
+<li><strong>options</strong> – Options used to obtain projections</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Pointer Copied</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Pointer</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="copper.dbpointer.WindowGapPointer">
+<em class="property">class </em><code class="descclassname">copper.dbpointer.</code><code class="descname">WindowGapPointer</code><span class="sig-paren">(</span><em>zid</em>, <em>db</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WindowGapPointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#copper.dbpointer.DBPointer" title="copper.dbpointer.DBPointer"><code class="xref py py-class docutils literal notranslate"><span class="pre">copper.dbpointer.DBPointer</span></code></a></p>
+<p>WindowGap Database Pointer Class</p>
+<dl class="method">
+<dt id="copper.dbpointer.WindowGapPointer.append_candidates">
+<code class="descname">append_candidates</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WindowGapPointer.append_candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add candidate to candidate set.</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>options</strong> – Options used to obtain candidates</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Candidates</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List(string)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.WindowGapPointer.partial_copy">
+<code class="descname">partial_copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WindowGapPointer.partial_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share Pointer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.dbpointer.WindowGapPointer.project">
+<code class="descname">project</code><span class="sig-paren">(</span><em>pattern</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.dbpointer.WindowGapPointer.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project sequence pattern.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> – Pattern of sequence</li>
+<li><strong>options</strong> – Options used to obtain projections</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Pointer Copied</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Pointer</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.fileprocessor">
+<span id="copper-fileprocessor-module"></span><h2>copper.fileprocessor module<a class="headerlink" href="#module-copper.fileprocessor" title="Permalink to this headline">¶</a></h2>
+<p>Read and process databases in Kosarak’s Format and SPMF Format.</p>
+<dl class="function">
+<dt id="copper.fileprocessor.ascii_formater">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">ascii_formater</code><span class="sig-paren">(</span><em>ascii_file</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.ascii_formater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a database in format of Kosarak’s Format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ascii_file</strong> (<em>string</em>) – Database in string in Kosarak’s format</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Database converted in spmf format</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.fileprocessor.ascii_to_spmf">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">ascii_to_spmf</code><span class="sig-paren">(</span><em>ascii_file</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.ascii_to_spmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a database in format of Kosarak’s convert to SPMF format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ascii_file</strong> (<em>string</em>) – Database in string in Kosarak format</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Database converted in spmf</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.fileprocessor.db_to_spmf">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">db_to_spmf</code><span class="sig-paren">(</span><em>db</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.db_to_spmf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert database in csv format to spmf format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>db</strong> (<em>string</em>) – Database in string in format csv</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Database in string in format spmf</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">String</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.fileprocessor.read_db_format">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">read_db_format</code><span class="sig-paren">(</span><em>u_db</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.read_db_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a database in a format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>u_db</strong> (<em>string</em>) – Logical expression to evaluate</li>
+<li><strong>options</strong> (<em>dict(String, Variant)</em>) – options to formats [“ascii”, “spmf”]</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Database formated in a list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List(String)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.fileprocessor.result_file">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">result_file</code><span class="sig-paren">(</span><em>result_mining</em>, <em>options</em>, <em>time_start=-1</em>, <em>time_end=-1</em>, <em>mem_after=-1</em>, <em>mem_before=-1</em>, <em>mem_max_after=-1</em>, <em>mem_max_before=-1</em>, <em>base='Results'</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.result_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain summary results file of mining</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>result_mining</strong> (<em>list</em>) – Database in string in format of spmf</li>
+<li><strong>options</strong> (<em>dict</em>)</li>
+<li><strong>time_start</strong> (<em>float</em>) – time of start process</li>
+<li><strong>time_end</strong> (<em>float</em>) – time of end process</li>
+<li><strong>mem_before</strong> (<em>float</em>)</li>
+<li><strong>mem_after</strong> (<em>float</em>)</li>
+<li><strong>mem_max_before</strong> (<em>float</em>)</li>
+<li><strong>mem_max_after</strong> (<em>float</em>)</li>
+<li><strong>base</strong> (<em>string</em>)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">File</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.fileprocessor.result_file_name">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">result_file_name</code><span class="sig-paren">(</span><em>base</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.result_file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>obtain name of results file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>base</strong> (<em>string</em>)</li>
+<li><strong>options</strong> (<em>dict</em>)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">name of result file name</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">String</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.fileprocessor.spmf_formater">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">spmf_formater</code><span class="sig-paren">(</span><em>mo_db</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.spmf_formater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert database in spmf format to Kosarak’s format</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mo_db</strong> (<em>string</em>) – Database in string in format of spmf</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Database in string in format of Kosarak</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">String</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.fileprocessor.unsafe_join">
+<code class="descclassname">copper.fileprocessor.</code><code class="descname">unsafe_join</code><span class="sig-paren">(</span><em>x</em>, <em>base=''</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.fileprocessor.unsafe_join" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join Unsafe Strings</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<em>string</em>)</li>
+<li><strong>base</strong> (<em>string</em>)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">String join with the base</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.infinity">
+<span id="copper-infinity-module"></span><h2>copper.infinity module<a class="headerlink" href="#module-copper.infinity" title="Permalink to this headline">¶</a></h2>
+<p>Infinity class for not relying on os/sys dependant calls such as MAXINT.</p>
+<dl class="class">
+<dt id="copper.infinity.Infinity">
+<em class="property">class </em><code class="descclassname">copper.infinity.</code><code class="descname">Infinity</code><a class="headerlink" href="#copper.infinity.Infinity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.interval">
+<span id="copper-interval-module"></span><h2>copper.interval module<a class="headerlink" href="#module-copper.interval" title="Permalink to this headline">¶</a></h2>
+<p>Pointer to interval and interval operations friend functions.</p>
+<dl class="class">
+<dt id="copper.interval.IntervalPointer">
+<em class="property">class </em><code class="descclassname">copper.interval.</code><code class="descname">IntervalPointer</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.interval.IntervalPointer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interval Pointer Class</p>
+<dl class="method">
+<dt id="copper.interval.IntervalPointer.check">
+<code class="descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.interval.IntervalPointer.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if interval is not empty or is not reached limit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.interval.IntervalPointer.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.interval.IntervalPointer.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next item in interval</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.interval.IntervalPointer.peek">
+<code class="descname">peek</code><span class="sig-paren">(</span><em>arg</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.interval.IntervalPointer.peek" title="Permalink to this definition">¶</a></dt>
+<dd><p>Peek in interval</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.logiceval">
+<span id="copper-logiceval-module"></span><h2>copper.logiceval module<a class="headerlink" href="#module-copper.logiceval" title="Permalink to this headline">¶</a></h2>
+<p>Module for the Logical evaluation functionality of COPPER
+using ShuntingYard to Postfix notation and an evaluation tree to finally
+obtain a function that takes a pattern and returns if it fulfills the logical
+condition given on the generating options.</p>
+<dl class="class">
+<dt id="copper.logiceval.Tree">
+<em class="property">class </em><code class="descclassname">copper.logiceval.</code><code class="descname">Tree</code><span class="sig-paren">(</span><em>root</em>, <em>left_leaf=None</em>, <em>read_leaf=None</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.logiceval.Tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract Syntax Tree</p>
+<dl class="method">
+<dt id="copper.logiceval.Tree.evaluate">
+<code class="descname">evaluate</code><span class="sig-paren">(</span><em>dictionary</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.logiceval.Tree.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate tree in semantic way.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dictionary</strong> (<em>string</em>) – token string to analyze</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Logical Expression Value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.logiceval.Tree.show">
+<code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.logiceval.Tree.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show tree in a string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Leaf String Value</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">String</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.logiceval.dictionaryeval">
+<code class="descclassname">copper.logiceval.</code><code class="descname">dictionaryeval</code><span class="sig-paren">(</span><em>dictionary</em>, <em>token</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.logiceval.dictionaryeval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate if a token is in a dictionary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dictionary</strong> (<em>dict</em>)</li>
+<li><strong>token</strong> (<em>string</em>)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.logiceval.evaluator">
+<code class="descclassname">copper.logiceval.</code><code class="descname">evaluator</code><span class="sig-paren">(</span><em>logical_expression</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.logiceval.evaluator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate logical expression.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>logical_expression</strong> (<em>string</em>) – Logical expression to evaluate</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Logical Expression Value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.logiceval.postfixtotree">
+<code class="descclassname">copper.logiceval.</code><code class="descname">postfixtotree</code><span class="sig-paren">(</span><em>postfix_chain</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.logiceval.postfixtotree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate Evaluation Tree with List in Postfix Notation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>postfix_chain</strong> (<em>string</em>) – postfix String used to populate a tree</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of tree leaves</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Tree List</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.logiceval.shuntingyard">
+<code class="descclassname">copper.logiceval.</code><code class="descname">shuntingyard</code><span class="sig-paren">(</span><em>token_chain</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.logiceval.shuntingyard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert Infix Notation to Postfix Notation using Shunting Yard Algorithm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>token_chain</strong> (<em>string</em>) – token string to analyze</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Queue Char in Postfix Order</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.metadata">
+<span id="copper-metadata-module"></span><h2>copper.metadata module<a class="headerlink" href="#module-copper.metadata" title="Permalink to this headline">¶</a></h2>
+<p>Package metadata</p>
+</div>
+<div class="section" id="module-copper.prefixspan">
+<span id="copper-prefixspan-module"></span><h2>copper.prefixspan module<a class="headerlink" href="#module-copper.prefixspan" title="Permalink to this headline">¶</a></h2>
+<p>Implementation of Jiawei Han, Jian Pei, Behzad Mortazavi-Asl,
+Helen Pinto, Qiming Chen, Umeshwar Dayal, MC Hsu, Prefixspan Algorithm
+in Python.</p>
+<p>With constraints added from Guevara-Cogorno, Flamand,
+Alatrista-Salas in COPPER Paper and Window/Time Gap constraints added from Alatrista-Salas, Guevara-Cogorno,
+Maehara, Nuñez del Prado in WinCOPPER Paper.</p>
+<dl class="function">
+<dt id="copper.prefixspan.prefixspan">
+<code class="descclassname">copper.prefixspan.</code><code class="descname">prefixspan</code><span class="sig-paren">(</span><em>sequences</em>, <em>raw_options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.prefixspan.prefixspan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prefixspan entry call, takes a database in the null separator
+format and a dictionary of options and returns frequent patterns
+and their frequency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>sequences</strong> (<em>List</em>) – database</li>
+<li><strong>raw_options</strong> (<em>List</em>) – options used to configure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">frequent patterns list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.prefixspan.validate_db">
+<code class="descclassname">copper.prefixspan.</code><code class="descname">validate_db</code><span class="sig-paren">(</span><em>db</em>, <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.prefixspan.validate_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>validate if database contain only 1-itemsets or
+contain any k-itemset and is setted correctly</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>db</strong> (<em>string</em>) – Database to validate</li>
+<li><strong>options</strong> (<em>dict</em>) – options used to configure</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Value of validation</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.profiling">
+<span id="copper-profiling-module"></span><h2>copper.profiling module<a class="headerlink" href="#module-copper.profiling" title="Permalink to this headline">¶</a></h2>
+<p>Profiling module</p>
+<dl class="function">
+<dt id="copper.profiling.elapsed_since">
+<code class="descclassname">copper.profiling.</code><code class="descname">elapsed_since</code><span class="sig-paren">(</span><em>start</em>, <em>end</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.profiling.elapsed_since" title="Permalink to this definition">¶</a></dt>
+<dd><p>[DEPRECATED]  Elapsed time depending seconds</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<em>date</em>) – start time</li>
+<li><strong>end</strong> (<em>date</em>) – end time</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">elapsed time in depending quantity of seconds elapsed</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.profiling.format_bytes">
+<code class="descclassname">copper.profiling.</code><code class="descname">format_bytes</code><span class="sig-paren">(</span><em>bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.profiling.format_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>[DEPRECATED]  format bytes in respective unit</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bytes</strong> (<em>float</em>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bytes depending quantity of bytes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.profiling.max_resident_memory">
+<code class="descclassname">copper.profiling.</code><code class="descname">max_resident_memory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.profiling.max_resident_memory" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">get max memory of process</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.profiling.number_patterns">
+<code class="descclassname">copper.profiling.</code><code class="descname">number_patterns</code><span class="sig-paren">(</span><em>results</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.profiling.number_patterns" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>results</strong> (<em>list</em>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">number of patterns</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="copper.profiling.process_memory">
+<code class="descclassname">copper.profiling.</code><code class="descname">process_memory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.profiling.process_memory" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">get current memory of process</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-copper.seqpattern">
+<span id="copper-seqpattern-module"></span><h2>copper.seqpattern module<a class="headerlink" href="#module-copper.seqpattern" title="Permalink to this headline">¶</a></h2>
+<p>Sequential pattern class for use with the prefixspan algorithm.</p>
+<dl class="class">
+<dt id="copper.seqpattern.Pattern">
+<em class="property">class </em><code class="descclassname">copper.seqpattern.</code><code class="descname">Pattern</code><a class="headerlink" href="#copper.seqpattern.Pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Pattern Class</p>
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append item in pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>int</em>) – item to append to pattern</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Pattern with item appended</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#copper.seqpattern.Pattern" title="copper.seqpattern.Pattern">Pattern</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.appended">
+<code class="descname">appended</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.appended" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate if item is appended in pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.assemble">
+<code class="descname">assemble</code><span class="sig-paren">(</span><em>item</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.assemble" title="Permalink to this definition">¶</a></dt>
+<dd><p>assemble the pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>item</strong> (<em>int</em>) – item to assemble to pattern</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.contained">
+<code class="descname">contained</code><span class="sig-paren">(</span><em>itemset</em><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.contained" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate if all items in other itemset is contained in this pattern</p>
+<p>Extended description of function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>itemset</strong> (<em>string</em>) – item to append to pattern</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.copy">
+<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy entire pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Pattern copied</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#copper.seqpattern.Pattern" title="copper.seqpattern.Pattern">Pattern</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.last">
+<code class="descname">last</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.last" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get last item</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Last item the pattern</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.project">
+<code class="descname">project</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project pattern</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="copper.seqpattern.Pattern.size">
+<code class="descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#copper.seqpattern.Pattern.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Size of item pattern in top</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">copper</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#install">Install</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="use.html">How to use</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Package Options</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package structure</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="options.html" title="previous chapter">Package Options</a></li>
+      <li>Next: <a href="bibliography.html" title="next chapter">Bibliography</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, BITMAP.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

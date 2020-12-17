@@ -1,0 +1,247 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Package Options &#8212; copper beta documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Package structure" href="modules.html" />
+    <link rel="prev" title="How to use" href="use.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="package-options">
+<h1>Package Options<a class="headerlink" href="#package-options" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="algorithm-configurations">
+<h2>Algorithm Configurations<a class="headerlink" href="#algorithm-configurations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="original-prefixspan">
+<h3>Original PrefixSpan<a class="headerlink" href="#original-prefixspan" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;threshold&#39;</span> <span class="p">:</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">float</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Descriptions</strong></p>
+<ul class="simple">
+<li><strong>threshold:</strong> support of patterns<ul>
+<li>if threshold value is <em>integer</em> means the size of sequences (Absolute Support)</li>
+<li>if threshold value is <em>float</em> means the percent of size of database (Ratio Support)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="copper">
+<h3>COPPER<a class="headerlink" href="#copper" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;threshold&#39;</span> <span class="p">:</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">float</span><span class="p">,</span>
+           <span class="s1">&#39;minSseq&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;maxSseq&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+           <span class="s1">&#39;minSize&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;maxSize&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+           <span class="s1">&#39;logic&#39;</span><span class="p">:</span> <span class="n">string</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Descriptions</strong></p>
+<ul class="simple">
+<li><strong>threshold:</strong> support of patterns<ul>
+<li>if threshold value is <em>integer</em> means the size of sequences (Absolute Support)</li>
+<li>if threshold value is <em>float</em> means the percent of size of database (Relative  Support)</li>
+</ul>
+</li>
+<li><strong>minSseq:</strong>  minimum itemset size constraint</li>
+<li><strong>maxSseq:</strong>  maximum itemset size constraint</li>
+<li><strong>minSize:</strong>  minimum pattern size constraint</li>
+<li><strong>maxSize:</strong>  maximum pattern size constraint</li>
+<li><strong>logic:</strong>  soft inclusion constraint<ul>
+<li>OR relation ‘(s1 | s2)’</li>
+<li>AND relation ‘(s1 &amp; s2)’</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="prefixspan-with-time-constraints-wingap">
+<h3>Prefixspan with time constraints (WinGap)<a class="headerlink" href="#prefixspan-with-time-constraints-wingap" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;threshold&#39;</span> <span class="p">:</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;window&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;gap&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Descriptions</strong></p>
+<ul class="simple">
+<li><strong>threshold:</strong> support of patterns<ul>
+<li>if threshold value is <em>integer</em> means the size of sequences (Absolute Support)</li>
+<li>if threshold value is <em>float</em> means the percent of size of database (Relative  Support)</li>
+</ul>
+</li>
+<li><strong>window:</strong>   maximum windows size between itemsets constraint</li>
+<li><strong>gap:</strong>  maximum gap between itemsets constraint</li>
+</ul>
+</div>
+<div class="section" id="copper-with-time-constraints-wincopper">
+<h3>COPPER with time constraints (WinCopper)<a class="headerlink" href="#copper-with-time-constraints-wincopper" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;threshold&#39;</span> <span class="p">:</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">float</span><span class="p">,</span>
+           <span class="s1">&#39;minSseq&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;maxSseq&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+               <span class="s1">&#39;minSize&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;maxSize&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+               <span class="s1">&#39;window&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;gap&#39;</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+               <span class="s1">&#39;logic&#39;</span><span class="p">:</span> <span class="n">string</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Descriptions</strong></p>
+<ul class="simple">
+<li><strong>threshold:</strong> support of patterns<ul>
+<li>if threshold value is an <em>integer</em> means the size of sequences (Absolute Support)</li>
+<li>if threshold value is a <em>float</em> means the percent of size of database (Relative Support)</li>
+</ul>
+</li>
+<li><strong>minSseq:</strong>  minimum itemset size constraint</li>
+<li><strong>maxSseq:</strong>  maximum itemset size constraint</li>
+<li><strong>minSize:</strong>  minimum pattern size constraint</li>
+<li><strong>maxSize:</strong>  maximum pattern size constraint</li>
+<li><strong>logic:</strong>  soft inclusion constraint<ul>
+<li>OR relation ‘(s1 | s2)’</li>
+<li>AND relation ‘(s1 &amp; s2)’</li>
+</ul>
+</li>
+<li><strong>window:</strong>   maximum windows size between itemsets constraint</li>
+<li><strong>gap:</strong>  maximum gap between itemsets constraint</li>
+</ul>
+</div>
+<div class="section" id="other-options">
+<h3>Other Options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;itemsSeparated&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="s1">&#39;dataDesc&#39;</span><span class="p">:</span> <span class="n">string</span><span class="p">,</span>
+           <span class="s1">&#39;resultFile&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="nb">bool</span><span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Descriptions</strong></p>
+<ul class="simple">
+<li><strong>itemsSeparated:</strong> Flag of separation of itemsets<ul>
+<li>if itemsSeparated value is <em>True</em> means the sequence contain k-itemsets</li>
+<li>if itemsSeparated value is <em>False</em> means the sequence only contain 1-itemsets <strong>[Default]</strong></li>
+</ul>
+</li>
+<li><strong>dataDesc:</strong> Put describing name of dataset used or note in a name of results file</li>
+<li><strong>resultFile:</strong> Flag of generation result file<ul>
+<li>if test value is <em>True</em> means the result file will be generated <strong>[Default]</strong></li>
+<li>if test value is <em>False</em> means the result file will not be generated</li>
+</ul>
+</li>
+<li><strong>test:</strong> Flag of generation of summary of tests file <em>(For Experimental Purpouses)</em><ul>
+<li>if test value is <em>True</em> means the summary of test will be generated</li>
+<li>if test value is <em>False</em> means the summary of test will not be generated <strong>[Default]</strong></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">copper</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html#install">Install</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="use.html">How to use</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package Options</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Package structure</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="use.html" title="previous chapter">How to use</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">Package structure</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, BITMAP.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/options.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
