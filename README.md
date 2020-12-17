@@ -39,7 +39,7 @@ python setup.py develop
 ```
 you can install from github by pip
 ```
-pip install git+https://github.com/bitmapup/prefixspanr/archive/v1.0.zip
+pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 ```
 
 ```copper``` depends on the following packages which will be installed by pip during the installation process
