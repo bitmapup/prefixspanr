@@ -1,4 +1,0 @@
-10 0 a 0 a b c 0 a c 0 d 0 c f
-20 0 a d 0 c 0 b c 0 a e
-30 0 e f 0 a b 0 d f 0 c b
-40 0 e 0 g 0 a f 0 c 0 b 0 c
