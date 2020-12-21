@@ -16,7 +16,7 @@ else:
     
 setup(
     name='wincopper',
-    version='1.0.0',
+    version=md.__version__,
     description='WinCopper Algorithm Implementation',
     url='git@github.com:bitmapup/prefixspanr.git',
     author=md.__author__,
