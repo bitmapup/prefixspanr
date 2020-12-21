@@ -38,7 +38,7 @@ or if you would install in your development environment you will use:
 ```
 python setup.py develop
 ```
-### Install by Pip
+### Install by PIP
 you can install last release using:
 ```
 pip install git+https://github.com/bitmapup/prefixspanr.git
