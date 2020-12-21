@@ -1,7 +1,7 @@
 from setuptools import setup
 import setuptools
 import sys
-import copper.metadata as md
+import wincopper.metadata as md
 
 assert sys.version[0] == '2', "This package currently works in Python 2.x, soon will be port to Python 3.x"
 
@@ -20,7 +20,7 @@ setup(
     description='WinCopper Algorithm Implementation',
     url='git@github.com:bitmapup/prefixspanr.git',
     author=md.__author__,
-    author_email='@pucp.edu.pe',
+    author_email=md.__author_email__,
     maintainer=md.__maintainer__,
     maintainer_email='ye.maehara@up.edu.pe',
     packages=setuptools.find_packages(),
