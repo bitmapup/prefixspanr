@@ -7,10 +7,10 @@ assert sys.version[0] == '2', "This package currently works in Python 2.x, soon 
 
 requires = []
 if sys.platform == 'win32':
-    requires = ['copper', 'pandas', 'psutil', 'numpy']
+    requires = ['pandas', 'psutil', 'numpy']
 elif sys.platform in ['linux', 'linux2', 'darwin', 'freebsd7', 
                       'freebsd8', 'freebsdN', 'openbsd6']:
-    requires = ['copper', 'pandas', 'psutil', 'numpy', 'resource']
+    requires = ['pandas', 'psutil', 'numpy', 'resource']
 else:
     assert requires != [], "OS not supported, Only supported in Windows and Unix-like"
     
