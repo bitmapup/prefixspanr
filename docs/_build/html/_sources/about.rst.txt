@@ -13,22 +13,36 @@ copper is a package which implements following sequential mining algorithms:
 Install
 ========
 
-if you would install in your environment
+Install by Source Code
+----------------------
+
+if you clone repository or download the source you can install in your environment you will use:
 ::
 
    python setup.py install
 
-if you would install in your development environment
+or if you would install in your development environment you will use:
 ::
 
    python setup.py develop
 
-coming soon install by pip...
+Install by Pip
+--------------
+
+you can install last release using:
+::
+
+   pip install git+https://github.com/bitmapup/prefixspanr.git
+
+or a specific version using:
+::
+
+   pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 
 
 Make sure to read the ``README.md`` in the public repository for notes on dependencies and installation.
 
-``copper`` depends on the following packages which will be installed by pip during the installation process
+``wincopper`` depends on the following packages which will be installed by pip during the installation process
 
 - ``psutil``
 - ``pandas``

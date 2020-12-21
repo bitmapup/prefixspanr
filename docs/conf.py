@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -20,7 +21,7 @@ sys.path.insert(0, os.path.relpath('..'))
 
 project = 'WinCOPPER'
 copyright = '2020, BITMAP'
-author = ['Augusto Guevara Cogorno', 'Hugo Alatrista Salas', 'Miguel Nunez del Prado']
+author = u'Augusto Guevara Cogorno, Hugo Alatrista Salas and Miguel Nuñez del Prado'
 maintainer = 'Yoshitomi Maehara Aliaga'
 # The short X.Y version
 version = '1.0'
