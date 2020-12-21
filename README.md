@@ -39,6 +39,10 @@ python setup.py develop
 ```
 you can install from github by pip
 ```
+pip install git+https://github.com/bitmapup/prefixspanr.git
+```
+or using specific version
+```
 pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 ```
 
