@@ -1,8 +1,8 @@
 # WinCOPPER
 
 ## Created by
-**Author:** Agustin Guevara Cogorno <br />
-**Maintainer:** Yoshitomi Maehara Aliaga<br />
+**Author:** Agustin Guevara-Cogorno, Hugo Alatrista Salas and Miguel Nuñez del Prado <br />
+**Maintainer:** Yoshitomi Maehara Aliaga <br />
 **Contact Details:** ye.maeharaa@up.edu.pe <br />
 **Institution:** Universidad del Pacifico
 <br />
@@ -29,24 +29,26 @@ Bibtex:
 ```
 
 ## Install
-if you would install in your environment
+### Install by Source Code
+if you clone repository or download the source you can install in your environment you will use:
 ```
 python setup.py install
 ```
-if you would install in your development environment
+or if you would install in your development environment you will use:
 ```
 python setup.py develop
 ```
-you can install from github by pip
+### Install by Pip
+you can install last release using:
 ```
 pip install git+https://github.com/bitmapup/prefixspanr.git
 ```
-or using specific version
+or a specific version using:
 ```
 pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 ```
 
-```copper``` depends on the following packages which will be installed by pip during the installation process
+```wincopper``` depends on the following packages which will be installed by pip during the installation process
 
 - ```psutil```
 - ```pandas```
@@ -56,7 +58,7 @@ pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 ## Usage
 - First read a data file
     * Data should be read in csv format with structure following
-  ```python
+```python
   import pandas as pd
   from ast import literal_eval
   path_res = "pei_dataset_modif.csv"
@@ -64,13 +66,13 @@ pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
   sids = list(data["sid"])
   sequences = list(data["sequence"])
   ```
-  ```
+```
   sid,sequence
   10,"['a' , ['a','b','c'] , ['a','c'] , 'd' , ['c','f']]"
   20,"[['a','d'] , 'c' , ['b','c'] , ['a','e']]"
   30,"[['e','f'] , ['a','b'] , ['d','f'] , 'c', 'b']"
   40,"['e' , 'g' , ['a','f'] , 'c' , 'b', 'c']"
-  ```
+ ```
     * Only the part of sequences will be processed without ids of sequences
 
 - Next set options values with an options configuration
@@ -85,9 +87,9 @@ options = {'threshold': threshold, 'itemsSeparated': items_separated}
 - Mining dataset with algorithms depending the options configuration with a part of sequences, getting result of mining and generate a result file
 
 ```python
-import copper
-
-result_mining = copper.prefixspan(sequences, options)
+import wincopper as wc
+# Run algorithm
+result_mining = wc.prefixspan(sequences, options)
 print(result_mining)
 ```
 ```
