@@ -15,9 +15,9 @@ else:
     assert requires != [], "OS not supported, Only supported in Windows and Unix-like"
     
 setup(
-    name='copper',
+    name='wincopper',
     version='1.0.0',
-    description='Copper Algorithm Implementation',
+    description='WinCopper Algorithm Implementation',
     url='git@github.com:bitmapup/prefixspanr.git',
     author=md.__author__,
     author_email='@pucp.edu.pe',
