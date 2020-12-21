@@ -18,12 +18,12 @@ sys.path.insert(0, os.path.relpath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'copper'
+project = 'WinCOPPER'
 copyright = '2020, BITMAP'
-author = 'Augusto Guevara Cogorno'
+author = ['Augusto Guevara Cogorno', 'Hugo Alatrista Salas', 'Miguel Nunez del Prado']
 maintainer = 'Yoshitomi Maehara Aliaga'
 # The short X.Y version
-version = ''
+version = '1.0'
 # The full version, including alpha/beta/rc tags
 release = 'beta'
 
@@ -72,9 +72,9 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-#html_theme = 'classic'
-#html_theme = 'bizstyle'
+# html_theme = 'alabaster'
+html_theme = 'classic'
+# html_theme = 'bizstyle'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

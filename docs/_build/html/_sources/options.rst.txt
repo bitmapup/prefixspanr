@@ -99,7 +99,7 @@ COPPER with time constraints (WinCopper)
 - **gap:**  maximum gap between itemsets constraint
 
 Other Options
-*************
+-------------
 
 .. code-block:: python
    :linenos:

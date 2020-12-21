@@ -7,17 +7,17 @@ COPPER with temporal constraints (WINCOPPER)
    about
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    use
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    options
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    modules
 
