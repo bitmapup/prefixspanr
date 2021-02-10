@@ -1,18 +1,18 @@
 # WinCOPPER
 
 ## Created by
-**Author:** Agustin Guevara-Cogorno, Hugo Alatrista Salas and Miguel Nuñez del Prado <br />
+**Authors:** Agustin Guevara-Cogorno, Hugo Alatrista Salas and Miguel Nuñez del Prado <br />
 **Maintainer:** Yoshitomi Maehara Aliaga <br />
-**Contact Details:** ye.maeharaa@up.edu.pe <br />
+**Contact Details:** h.alatristas@up.edu.pe <br />
 **Institution:** Universidad del Pacifico
 <br />
 
 **Note:** use Python 2.7.*
 
 ## Description
-Extension of COPPER algorithm with time constraints capabilities, improving the selection of interesting patterns for expert.
+WinCopper is an extension of COPPER algorithm [1], originally developed to extract sequential patterns under items-inclusion constraint. New WinCopper incorporates - also - time constraints capabilities, improving the extraction of useful patterns.
 
-if you use a package please cite the following paper:
+If WinCopper is used in your experimentations, please, we will be grateful if you cite us:
 
 > Alatrista-Salas, H., Guevara-Cogorno, A., Maehara, Y. Nunez-del-Prado, M. (2020). Efficiently Mining Gapped and Window Constraint Frequent Sequential Patterns. *Proceedings 17th International Conference on Modeling Decisions for Artificial Intelligence* [[link]](https://link.springer.com/chapter/10.1007/978-3-030-57524-3_20)
 
@@ -29,33 +29,33 @@ Bibtex:
 ```
 
 ## Install
-### Install by Source Code
-if you clone repository or download the source you can install in your environment you will use:
+### Install WinCopper thought Source Code
+You can clone the Github repository, or you can download the code source. For both options, WinCopper could be installed using the following instructions:
 ```
 python setup.py install
 ```
-or if you would install in your development environment you will use:
+Also, if you prefer to install WinCopper in your development environment, you can use this:
 ```
 python setup.py develop
 ```
-### Install by PIP
-you can install last release using:
+### Install WinCopper thought PIP
+A simple way to install WinCopper is through PIP:
 ```
 pip install git+https://github.com/bitmapup/prefixspanr.git
 ```
-or a specific version using:
+Also, you can select a specific version o  WinCopper through the instruction.
 ```
 pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 ```
 
-```wincopper``` depends on the following packages which will be installed by pip during the installation process
+```wincopper``` depends on the following packages. Please, be sure that these packages are correctly installed before installing WinCopper.
 
 - ```psutil```
 - ```pandas```
 - ```numpy```
 - ```resources``` (Only in Linux-like OS)
 
-## Usage
+## WinCopper Usage
 - First read a data file
     * Data should be read in csv format with structure following
 ```python
@@ -193,7 +193,7 @@ options = {'itemsSeparated': bool, 'dataDesc': string,
 
 
 ## References
-- Guevara-Cogorno, A., Flamand, C. y Alatrista-Salas, H. (2015). COPPER - Constraint OPtimized Prefixspan for Epidemiological Research. *Procedia Computer Science*, *63*, 433-438.  [[link]](http://www.sciencedirect.com/science/article/pii/S1877050915024990)
-- Pei, J., Han, J., Mortazavi-Asl, B. y Pinto H. (2002). PrefixSpan,: mining sequential patterns efficiently by prefix-projected pattern growth. *Proceedings 17th International Conference on Data Engineering*. 215-224. [[link]](http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf)
+- [1] Guevara-Cogorno, A., Flamand, C. y Alatrista-Salas, H. (2015). COPPER - Constraint OPtimized Prefixspan for Epidemiological Research. *Procedia Computer Science*, *63*, 433-438.  [[link]](http://www.sciencedirect.com/science/article/pii/S1877050915024990)
+- [2] Pei, J., Han, J., Mortazavi-Asl, B. y Pinto H. (2002). PrefixSpan,: mining sequential patterns efficiently by prefix-projected pattern growth. *Proceedings 17th International Conference on Data Engineering*. 215-224. [[link]](http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf)
 
 
