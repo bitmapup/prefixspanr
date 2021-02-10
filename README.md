@@ -1,16 +1,17 @@
 # WinCOPPER
 
 ## Created by
-**Authors:** Agustin Guevara-Cogorno, Hugo Alatrista Salas and Miguel Nuñez del Prado <br />
+**Author:** Agustin Guevara-Cogorno <br />
+**Advisors** Hugo Alatrista-Salas and Miguel Nuñez-del-Prado <br />
 **Maintainer:** Yoshitomi Maehara Aliaga <br />
 **Contact Details:** h.alatristas@up.edu.pe <br />
-**Institution:** Universidad del Pacifico
+**Institution:** Universidad del Pacifico / Pontificia Universidad Católica del Perú
 <br />
 
 **Note:** use Python 2.7.*
 
 ## Description
-WinCopper is an extension of COPPER algorithm [1], originally developed to extract sequential patterns under items-inclusion constraint. New WinCopper incorporates - also - time constraints capabilities, improving the extraction of useful patterns.
+WinCOPPER [3] is an extension of COPPER algorithm [1], originally developed to extract sequential patterns [2] under items-inclusion constraint. New WinCOPPER incorporates - also - time constraints capabilities, improving the extraction of useful patterns.
 
 If WinCopper is used in your experimentations, please, we will be grateful if you cite us:
 
@@ -29,35 +30,34 @@ Bibtex:
 ```
 
 ## Install
-### Install WinCopper thought Source Code
-You can clone the Github repository, or you can download the code source. For both options, WinCopper could be installed using the following instructions:
+### Install WinCOPPER thought Source Code
+You can clone the Github repository, or you can download the code source. For both options, WinCOPPER could be installed using the following instructions:
 ```
 python setup.py install
 ```
-Also, if you prefer to install WinCopper in your development environment, you can use this:
+Also, if you prefer to install WinCOPPER in your development environment, you can use this:
 ```
 python setup.py develop
 ```
 ### Install WinCopper thought PIP
-A simple way to install WinCopper is through PIP:
+A simple way to install WinCOPPER is through PIP:
 ```
 pip install git+https://github.com/bitmapup/prefixspanr.git
 ```
-Also, you can select a specific version o  WinCopper through the instruction.
+Also, you can select a specific version o  WinCOPPER through the instruction.
 ```
 pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 ```
 
-```wincopper``` depends on the following packages. Please, be sure that these packages are correctly installed before installing WinCopper.
+```wincopper``` depends on the following packages. Please, be sure that these packages are correctly installed before installing WinCOPPER.
 
 - ```psutil```
 - ```pandas```
 - ```numpy```
 - ```resources``` (Only in Linux-like OS)
 
-## WinCopper Usage
-- First read a data file
-    * Data should be read in csv format with structure following
+## WinCopper usage example
+1. Read the CSV dataset.
 ```python
   import pandas as pd
   from ast import literal_eval
@@ -75,7 +75,7 @@ pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
  ```
     * Only the part of sequences will be processed without ids of sequences
 
-- Next set options values with an options configuration
+2. Set the WinCOPPER options values with (see next section).
 ```python
 # Absolute threshold 
 threshold = 3
@@ -84,7 +84,7 @@ items_separated = False
 # is a configuration of a Original PrefixSpan
 options = {'threshold': threshold, 'itemsSeparated': items_separated}
 ```
-- Mining dataset with algorithms depending the options configuration with a part of sequences, getting result of mining and generate a result file
+3. Mine the dataset with WinCOPPER incorporating the options settled in the previous step.
 
 ```python
 import wincopper as wc
@@ -111,16 +111,18 @@ print(result_mining)
 
 ## Configuration Options
 
+It is worth noting that, WinCOPPER includes capabilities of PrefixSpam [2] and Copper [1] algorithms.
+
 ### Algorithm Configurations
 
-**1) Original PrefixSpan**
+**1) Original PrefixSpan [2] **
 ```python
 options = {'threshold' : int or float}
 ```
 #### Descriptions
 - **threshold:**  support of patterns
-    * if threshold value is *integer* means the size of sequences (Absolute Support)
-    * if threshold value is *float* means the percent of size of database (Ratio Support)
+    * If the threshold value is an *integer*, WinCopper assumes that an Absolute Support is using.
+    * If the threshold value is a *float*, WinCopper assumes that a Relative Support is using.
 
 **2) COPPER**
 ```python
@@ -131,12 +133,12 @@ options = {'threshold' : int or float,
 ```
 #### Descriptions
 - **threshold:**  support of patterns
-    * if threshold value is *integer* means the size of sequences (Absolute Support)
-    * if threshold value is *float* means the percent of size of database (Relative  Support)
-- **minSseq:**  minimum itemset size constraint
-- **maxSseq:**  maximum itemset size constraint
-- **minSize:**  minimum pattern size constraint
-- **maxSize:**  maximum pattern size constraint
+    * If the threshold value is an *integer*, WinCopper assumes that an Absolute Support is using.
+    * If the threshold value is a *float*, WinCopper assumes that a Relative Support is using.
+- **minSseq:**  minimum itemset size constraint (itemset size)
+- **maxSseq:**  maximum itemset size constraint (itemset size)
+- **minSize:**  minimum pattern size constraint (subsequence size)
+- **maxSize:**  maximum pattern size constraint (subsequence size)
 - **logic:**  soft inclusion constraint
     * OR relation '(s1 | s2)'
     * AND relation '(s1 & s2)'
@@ -147,12 +149,12 @@ options = {'threshold' : int or float, 'window' : int, 'gap' : int}
 ```
 #### Descriptions
 - **threshold:**  support of patterns
-    * if threshold value is *integer* means the size of sequences (Absolute Support)
-    * if threshold value is *float* means the percent of size of database (Relative  Support)
-- **window:**  maximum windows size between itemsets constraint
-- **gap:**  maximum gap between itemsets constraint
+    * If the threshold value is an *integer*, WinCopper assumes that an Absolute Support is using.
+    * If the threshold value is a *float*, WinCopper assumes that a Relative Support is using.
+- **window:**  maximum windows size between itemsets 
+- **gap:**  maximum gap between itemsets
 
-**4) COPPER with time constraints (WinCopper)**
+**4) WinCOPPER (Copper with time constraints)**
 ```python
 options = {'threshold' : int or float,
            'minSseq': int, 'maxSseq': int,
@@ -162,12 +164,12 @@ options = {'threshold' : int or float,
 ```
 #### Descriptions
 - **threshold:**  support of patterns
-    * if threshold value is an *integer* means the size of sequences (Absolute Support)
-    * if threshold value is a *float* means the percent of size of database (Relative Support)
-- **minSseq:**  minimum itemset size constraint
-- **maxSseq:**  maximum itemset size constraint
-- **minSize:**  minimum pattern size constraint
-- **maxSize:**  maximum pattern size constraint
+    * If the threshold value is an *integer*, WinCopper assumes that an Absolute Support is using.
+    * If the threshold value is a *float*, WinCopper assumes that a Relative Support is using.
+- **minSseq:**  minimum itemset size constraint (itemset size)
+- **maxSseq:**  maximum itemset size constraint (itemset size)
+- **minSize:**  minimum pattern size constraint (subsequence size)
+- **maxSize:**  maximum pattern size constraint (subsequence size)
 - **logic:**  soft inclusion constraint
     * OR relation '(s1 | s2)'
     * AND relation '(s1 & s2)'
@@ -180,20 +182,21 @@ options = {'itemsSeparated': bool, 'dataDesc': string,
            'resultFile': bool, 'test': bool}
 ```
 #### Descriptions
-- **itemsSeparated:**  Flag of separation of itemsets
-    * if itemsSeparated value is *True* means the sequence only contain 1-itemsets
-    * if itemsSeparated value is *False* means the sequence contain k-itemsets **[Default]**
-- **dataDesc:**  Put describing name of dataset used or note in a name of results file
-- **resultFile:** Flag of generation result file
-    * if test value is *True* means the result file will be generated **[Default]**
-    * if test value is *False* means the result file will not be generated
-- **test:**  Flag of generation of summary of tests file *(For Experimental Purpouses)*
-    * if test value is *True* means the summary of test will be generated
-    * if test value is *False* means the summary of test will not be generated **[Default]**
+- **itemsSeparated:**  Flag for separation of itemsets
+    * If the itemsSeparated value is *True*, patterns will contain only 1-itemsets
+    * If the itemsSeparated value is *False*, patterns will contain k-itemsets **[Default]**
+- **dataDesc:**  Allows fixing a name to the results file.
+- **resultFile:** Flag for generating a results file
+    * If the resultFile value is *True*, a file with the extracted patterns will be generated. **[Default]**
+    * If the resultFile value is *False*, a file will not be generated.
+- **test:**  Flag for generating a summary of tests file *(for experimentation purpouses)*
+    * If the test value is *True*, a summary of test will be generated
+    * If the test value is *False*, a summary of test will not be generated **[Default]**
 
 
 ## References
 - [1] Guevara-Cogorno, A., Flamand, C. y Alatrista-Salas, H. (2015). COPPER - Constraint OPtimized Prefixspan for Epidemiological Research. *Procedia Computer Science*, *63*, 433-438.  [[link]](http://www.sciencedirect.com/science/article/pii/S1877050915024990)
 - [2] Pei, J., Han, J., Mortazavi-Asl, B. y Pinto H. (2002). PrefixSpan,: mining sequential patterns efficiently by prefix-projected pattern growth. *Proceedings 17th International Conference on Data Engineering*. 215-224. [[link]](http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf)
+- [3] Alatrista-Salas H., Guevara-Cogorno A., Maehara Y., Nunez-del-Prado M. (2020) Efficiently Mining Gapped and Window Constraint Frequent Sequential Patterns. In: Torra V., Narukawa Y., Nin J., Agell N. (eds) Modeling Decisions for Artificial Intelligence. MDAI 2020. Lecture Notes in Computer Science, vol 12256. Springer, Cham. [[link]](https://doi.org/10.1007/978-3-030-57524-3_20)
 
 
