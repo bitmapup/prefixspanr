@@ -57,7 +57,7 @@ pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 - ```resources``` (Only in Linux-like OS)
 
 ## WinCopper usage example
-1. Read the CSV dataset.
+1. Read the CSV dataset (an example of the input file is shown in the example folder). 
 ```python
   import pandas as pd
   from ast import literal_eval
