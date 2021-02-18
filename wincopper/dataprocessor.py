@@ -138,6 +138,9 @@ def pattern_to_list(result_patterns):
                 else:
                     pattern.append(itemset)
                 itemset = ''
+        if len(pattern) == 1:
+            if type(pattern[0]) == list:
+                pattern = pattern[0]
         result_pattern_list.append([pattern, row_pattern[1], row_pattern[2]])
     return result_pattern_list
 
