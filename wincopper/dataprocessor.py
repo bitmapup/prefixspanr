@@ -138,9 +138,6 @@ def pattern_to_list(result_patterns):
                 else:
                     pattern.append(itemset)
                 itemset = ''
-        if len(pattern) == 1:
-            if type(pattern[0]) == list:
-                pattern = pattern[0]
         result_pattern_list.append([pattern, row_pattern[1], row_pattern[2]])
     return result_pattern_list
 
@@ -172,26 +169,41 @@ def decode_sequences(raw_db, result_pattern_list, item_separated=False):
     decoded_sequence = {str(i + 1): sequence_set[i] for i in range(0, len(sequence_set))}
 
     result_pattern = pattern_to_list(result_pattern_list)
+
     decoded_result = []
     if not item_separated:
         for pattern in result_pattern:
-            pattern_decoded = []
+            # pattern_decoded = []
+            pattern_decoded = ""
             for itemset in pattern[0]:
                 if type(itemset) == list:
                     cell = []
+                    cell = '<'
                     for item in itemset:
-                        cell.append(decoded_sequence[item])
-                    pattern_decoded.append(cell)
+                        # cell.append(decoded_sequence[item])
+                        cell += str(decoded_sequence[item])
+                        cell += ','
+                    cell = cell[:-1]
+                    cell += '>'
+                    # pattern_decoded.append(cell)
+                    pattern_decoded += cell
                 else:
-                    pattern_decoded.append(decoded_sequence[itemset])
+                    # pattern_decoded.append(str(decoded_sequence[itemset]))
+                    pattern_decoded += '<' + str(decoded_sequence[itemset]) + '>'
 
             decoded_result.append([pattern_decoded, pattern[1], pattern[2]])
     else:
         for pattern in result_pattern:
-            pattern_decoded = []
+            # pattern_decoded = []
+            pattern_decoded = ""
             for itemset in pattern[0]:
-                pattern_decoded.append(decoded_sequence[itemset])
+                pattern_decoded += "<"
+                pattern_decoded += decoded_sequence[itemset]
+                # pattern_decoded.append(decoded_sequence[itemset])
+                pattern_decoded += ">"
+
             decoded_result.append([pattern_decoded, pattern[1], pattern[2]])
+
     return decoded_result
 
 

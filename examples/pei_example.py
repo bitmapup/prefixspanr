@@ -15,5 +15,5 @@ sequences = list(data["sequence"])
 
 result_mining = wc.prefixspan(sequences, options)
 
-for l in result_mining:
-    print(l)
+for pat in result_mining:
+    print(pat)
