@@ -12,5 +12,5 @@ __maintainer__ = "Yoshitomi Eduardo Maehara Aliaga"
 __maintainer_email__ = "ye.maeharaa@up.edu.pe"
 __credits__ = ["Agustin Guevara Cogorno", "Yoshitomi Eduardo Maehara Aliaga"]
 __institution_ = "Universidad del Pacifico"
-__version__ = "1.1.0"
+__version__ = "1.0.2"
 __status__ = "Beta"
