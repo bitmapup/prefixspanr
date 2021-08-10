@@ -108,7 +108,7 @@ def __parse_options__(options):
     """
 
     assert 'threshold' in options
-    assert isinstance(options['threshold'], (int, long))
+    assert isinstance(options['threshold'], (int, float))
 
     options['Pattern'] = Pattern
 
@@ -248,7 +248,7 @@ def __prefixspan__(u_pointerdb, u_pattern, options, freqpatterns):
         if entry:
             pointerdb.append(entry)
     freqpatterns.append([u_pattern, len(pointerdb), float(len(pointerdb))/float(options['databaseLen'])])
-    
+
     # Assemble - Get assemble candidates
     candidates = __itembag_merge__(map(lambda e: e.assemble_candidates(options), pointerdb))
     assemblings = filter(lambda i: candidates[i] >= options['threshold'], candidates)
