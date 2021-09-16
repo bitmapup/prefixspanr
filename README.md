@@ -4,8 +4,8 @@
 **Author:** Agustin Guevara-Cogorno <br />
 **Advisors** Hugo Alatrista-Salas and Miguel Nuñez-del-Prado <br />
 **Maintainer:** Yoshitomi Maehara Aliaga <br />
-**Contact Details:** h.alatristas@up.edu.pe <br />
-**Institution:** Universidad del Pacifico / Pontificia Universidad Católica del Perú
+**Contact Details:** halatrista@utec.edu.pe <br />
+**Institution:** Pontificia Universidad Católica del Perú / Universidad de Ingeniería y Tecnología UTEC
 <br />
 
 **Note:** use Python 2.7.*
