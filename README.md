@@ -5,7 +5,7 @@
 **Advisors** Hugo Alatrista-Salas and Miguel Nuñez-del-Prado <br />
 **Maintainer:** Yoshitomi Maehara Aliaga <br />
 **Contact Details:** halatrista@utec.edu.pe <br />
-**Institution:** Pontificia Universidad Católica del Perú / Universidad de Ingeniería y Tecnología UTEC
+**Institution:** Pontificia Universidad Católica del Perú (PUCP) / Universidad de Ingeniería y Tecnología (UTEC)
 <br />
 
 **Note:** use Python 2.7.*
@@ -15,7 +15,7 @@ WinCOPPER [3] is an extension of COPPER algorithm [1], originally developed to e
 
 If WinCopper is used in your experimentations, please, we will be grateful if you cite us:
 
-> Alatrista-Salas, H., Guevara-Cogorno, A., Maehara, Y. Nunez-del-Prado, M. (2020). Efficiently Mining Gapped and Window Constraint Frequent Sequential Patterns. *Proceedings 17th International Conference on Modeling Decisions for Artificial Intelligence* [[link]](https://link.springer.com/chapter/10.1007/978-3-030-57524-3_20)
+> Alatrista-Salas, H., Guevara-Cogorno, A., Maehara and Y. Nunez-del-Prado, M. (2020). Efficiently Mining Gapped and Window Constraint Frequent Sequential Patterns. *Proceedings 17th International Conference on Modeling Decisions for Artificial Intelligence* [[link]](https://link.springer.com/chapter/10.1007/978-3-030-57524-3_20)
 
 Bibtex:
 ```
@@ -59,13 +59,13 @@ pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 ## WinCopper usage example
 1. Read the CSV dataset (an example of the input file is shown in the example folder). 
 ```python
-  import pandas as pd
-  from ast import literal_eval
-  path_res = "pei_dataset_modif.csv"
-  data = pd.read_csv(path_res, sep=",", header=0, converters={"sequence": literal_eval})
-  sids = list(data["sid"])
-  sequences = list(data["sequence"])
-  ```
+import pandas as pd
+from ast import literal_eval
+path_res = "pei_dataset_modif.csv"
+data = pd.read_csv(path_res, sep=",", header=0, converters={"sequence": literal_eval})
+sids = list(data["sid"])
+sequences = list(data["sequence"])
+```
 ```
   sid,sequence
   10,"['a' , ['a','b','c'] , ['a','c'] , 'd' , ['c','f']]"
@@ -77,7 +77,7 @@ pip install git+https://github.com/bitmapup/prefixspanr.git@v1.0
 
 2. Set the WinCOPPER options values with (see next section).
 ```python
-# Absolute threshold 
+# Absolute threshold
 threshold = 3
 # Contains k-itemsets separated by commas
 items_separated = False
@@ -110,6 +110,13 @@ for l in result_mining:
 ['<e>', 3, 0.75]
 ['<f>', 3, 0.75]
 ```
+## Wincopper in google Colaboratory
+Is possible to run example in Google colaboratory using 
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/googlecolab/colabtools/blob/master/examples/notebook-example.ipynb)
+
+also is possible to create a new notebook with python 2 and after install package by pip using
+[link 1](colab.to/py2) or [link 2](https://colab.research.google.com/notebook#create=true&language=python2)
 
 ## Configuration Options
 
@@ -197,8 +204,6 @@ options = {'itemsSeparated': bool, 'dataDesc': string,
 
 
 ## References
-- [1] Guevara-Cogorno, A., Flamand, C. y Alatrista-Salas, H. (2015). COPPER - Constraint OPtimized Prefixspan for Epidemiological Research. *Procedia Computer Science*, *63*, 433-438.  [[link]](http://www.sciencedirect.com/science/article/pii/S1877050915024990)
-- [2] Pei, J., Han, J., Mortazavi-Asl, B. y Pinto H. (2002). PrefixSpan,: mining sequential patterns efficiently by prefix-projected pattern growth. *Proceedings 17th International Conference on Data Engineering*. 215-224. [[link]](http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf)
-- [3] Alatrista-Salas H., Guevara-Cogorno A., Maehara Y., Nunez-del-Prado M. (2020) Efficiently Mining Gapped and Window Constraint Frequent Sequential Patterns. In: Torra V., Narukawa Y., Nin J., Agell N. (eds) Modeling Decisions for Artificial Intelligence. MDAI 2020. Lecture Notes in Computer Science, vol 12256. Springer, Cham. [[link]](https://doi.org/10.1007/978-3-030-57524-3_20)
-
-
+- [1] Guevara-Cogorno, A., Flamand, C. and Alatrista-Salas, H. (2015). COPPER - Constraint OPtimized Prefixspan for Epidemiological Research. *Procedia Computer Science*, *63*, 433-438.  [[link]](http://www.sciencedirect.com/science/article/pii/S1877050915024990)
+- [2] Pei, J., Han, J., Mortazavi-Asl, B. and Pinto H. (2002). PrefixSpan,: mining sequential patterns efficiently by prefix-projected pattern growth. *Proceedings 17th International Conference on Data Engineering*. 215-224. [[link]](http://jayurbain.com/msoe/cs498-datamining/prefixspan_mining_sequential_patterns_by_prefix_projected_growth.pdf)
+- [3] Alatrista-Salas H., Guevara-Cogorno A., Maehara Y. and Nunez-del-Prado M. (2020) Efficiently Mining Gapped and Window Constraint Frequent Sequential Patterns. In: Torra V., Narukawa Y., Nin J., Agell N. (eds) Modeling Decisions for Artificial Intelligence. MDAI 2020. Lecture Notes in Computer Science, vol 12256. Springer, Cham. [[link]](https://doi.org/10.1007/978-3-030-57524-3_20)
